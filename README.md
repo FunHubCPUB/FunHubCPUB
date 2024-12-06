@@ -2,10 +2,10 @@
 
 Discover, explore, and create at FunHub—your ultimate hub for knowledge, creativity, and innovation.
 
-- 🎨 **For Artists:** Dive into inspiration and showcase your creativity. [Visit the Artist Hub](funhub.lol/artist.html)
-- 🌐 **Explore Knowledge:** Curious about biology, religion, or science? Get answers to your questions. [Learn More](funhub.lol/learn.html)
-- 💻 **The Codebase:** Access a full-stack library of code, tools, and resources. [Explore the Codebase](funhub.lol/code.html)
-- 🔗 **Home of Links:** A curated collection of resources, guides, and connections to everything you need. [Discover Links](funhub.lol/links.html)
+- 🎨 **For Artists:** Dive into inspiration and showcase your creativity. [Visit the Artist Hub](https://www.funhub.lol/artist.html)
+- 🌐 **Explore Knowledge:** Curious about biology, religion, or science? Get answers to your questions. [Learn More](https://www.funhub.lol/learn.html)
+- 💻 **The Codebase:** Access a full-stack library of code, tools, and resources. [Explore the Codebase](https://www.funhub.lol/code.html)
+- 🔗 **Home of Links:** A curated collection of resources, guides, and connections to everything you need. [Discover Links](https://www.funhub.lol/links.html)
 
 Whether you're here to build, learn, or express yourself, FunHub is the place to start. Let’s make something amazing together.
 
