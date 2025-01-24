@@ -5,7 +5,7 @@
 	<title></title>
 	<meta name="generator" content="LibreOffice 24.8.0.3 (Windows)"/>
 	<meta name="created" content="2024-12-05T21:19:15.700000000"/>
-	<meta name="changed" content="2025-01-22T16:21:45.708000000"/>
+	<meta name="changed" content="2025-01-24T10:55:25.071000000"/>
 	<style type="text/css">
 		@page { size: 8.5in 11in; margin-left: 0.79in; margin-right: 0.39in; margin-top: 0.39in; margin-bottom: 0.39in }
 		p { line-height: 115%; text-indent: 0.25in; margin-bottom: 0.1in; background: transparent; background: transparent }
@@ -24,10 +24,17 @@
 		h4.ctl { font-family: "Lucida Sans"; font-size: 12pt; font-weight: bold }
 		td p { orphans: 0; widows: 0; background: transparent; background: transparent }
 		th p { font-weight: bold; text-align: center; orphans: 0; widows: 0; background: transparent; background: transparent }
+		pre { background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		pre.cjk { font-family: "NSimSun", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
 		strong { font-weight: bold }
 		em { font-style: italic }
 		a:link { color: #000080; text-decoration: underline }
 		a:visited { color: #800000; text-decoration: underline }
+		code.western { font-family: "Liberation Mono", monospace }
+		code.cjk { font-family: "NSimSun", monospace }
+		code.ctl { font-family: "Liberation Mono", monospace }
 	</style>
 </head>
 <body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p class="western" style="line-height: 100%; border-top: none; border-bottom: 1px double #808080; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0in">
@@ -1231,10 +1238,120 @@ example list:</p>
 iterating through combinations of roots and suffixes, ensuring each
 term feels unique yet grounded in the artistic organism's conceptual
 framework. Would you like me to procedurally generate more words?</p>
-<p class="western"><br/>
-<br/>
+<h1 class="western">[1.07]</h1>
+<p class="western">Here’s how you can code a custom encrypted
+message using a dictionary-based cipher where parts of words act as
+keys, effectively compressing the message. This approach works by
+building a dictionary of word fragments or syllables from the message
+and using shorter codes to represent them. Below is an example in
+Python:</p>
+<h3 class="western">Steps:</h3>
+<ol>
+	<li><p class="western" style="margin-bottom: 0in">Extract unique
+	parts of the message (words or syllables). 
+	</p></li>
+	<li><p class="western" style="margin-bottom: 0in">Assign each part a
+	unique short identifier. 
+	</p></li>
+	<li><p class="western" style="margin-bottom: 0in">Replace the parts
+	in the message with their corresponding identifiers. 
+	</p></li>
+	<li><p class="western">Output both the dictionary and the encoded
+	message. 
+	</p></li>
+</ol>
+<h3 class="western">Code Implementation:</h3>
+<pre class="western"><code class="western">import re</code>
 
-</p>
+<code class="western">def create_cipher(message):</code>
+<code class="western">    </code><code class="western"># Step 1: Tokenize the message into words</code>
+<code class="western">    </code><code class="western">words = re.findall(r'\b\w+\b', message)</code>
+<code class="western">    </code>
+<code class="western">    </code><code class="western"># Step 2: Create a dictionary of unique fragments</code>
+<code class="western">    </code><code class="western">unique_parts = sorted(set(words), key=lambda x: -len(x))  # Sort by length to prioritize longer words</code>
+<code class="western">    </code><code class="western">dictionary = {part: f&quot;{i:03}&quot; for i, part in enumerate(unique_parts)}</code>
+<code class="western">    </code>
+<code class="western">    </code><code class="western"># Step 3: Replace words in the message with their dictionary keys</code>
+<code class="western">    </code><code class="western">encoded_message = message</code>
+<code class="western">    </code><code class="western">for word, code in dictionary.items():</code>
+<code class="western">        </code><code class="western">encoded_message = re.sub(rf'\b{word}\b', code, encoded_message)</code>
+<code class="western">    </code>
+<code class="western">    </code><code class="western">return dictionary, encoded_message</code>
+
+<code class="western">def decode_cipher(encoded_message, dictionary):</code>
+<code class="western">    </code><code class="western"># Reverse the dictionary for decoding</code>
+<code class="western">    </code><code class="western">reverse_dict = {v: k for k, v in dictionary.items()}</code>
+<code class="western">    </code>
+<code class="western">    </code><code class="western"># Replace codes with original parts</code>
+<code class="western">    </code><code class="western">decoded_message = encoded_message</code>
+<code class="western">    </code><code class="western">for code, part in reverse_dict.items():</code>
+<code class="western">        </code><code class="western">decoded_message = re.sub(rf'\b{code}\b', part, decoded_message)</code>
+<code class="western">    </code>
+<code class="western">    </code><code class="western">return decoded_message</code>
+
+<code class="western"># Example usage</code>
+<code class="western">original_message = &quot;This is a test message. This message is encoded for security.&quot;</code>
+<code class="western">dictionary, cipher = create_cipher(original_message)</code>
+
+<code class="western">print(&quot;Dictionary (Fragment -&gt; Code):&quot;)</code>
+<code class="western">print(dictionary)</code>
+
+<code class="western">print(&quot;\nEncoded Message:&quot;)</code>
+<code class="western">print(cipher)</code>
+
+<code class="western"># Decode the message</code>
+<code class="western">decoded_message = decode_cipher(cipher, dictionary)</code>
+<code class="western">print(&quot;\nDecoded Message:&quot;)</code>
+<code class="western">print(decoded_message)</code></pre><h3 class="western">
+Explanation:</h3>
+<ol>
+	<li><p class="western"><strong>Dictionary Creation</strong>:</p>
+	<ul>
+		<li><p class="western" style="margin-bottom: 0in">Each unique word
+		in the message is assigned a three-digit numeric code (<code class="western">001</code>,
+		<code class="western">002</code>, etc.). 
+		</p></li>
+		<li><p class="western" style="margin-bottom: 0in">The dictionary is
+		sorted by word length to ensure longer matches take precedence when
+		encoding. 
+		</p></li>
+	</ul>
+	<li><p class="western"><strong>Encoding</strong>:</p>
+	<ul>
+		<li><p class="western" style="margin-bottom: 0in">Each word in the
+		original message is replaced with its corresponding code from the
+		dictionary. 
+		</p></li>
+	</ul>
+	<li><p class="western"><strong>Decoding</strong>:</p>
+	<ul>
+		<li><p class="western">Reverse the dictionary and replace codes in
+		the encoded message to retrieve the original text. 
+		</p></li>
+	</ul>
+</ol>
+<h3 class="western">Example Output:</h3>
+<h4 class="western">Original Message:</h4>
+<pre class="western" style="margin-bottom: 0.2in"><code class="western">This is a test message. This message is encoded for security.</code></pre><h4 class="western">
+Dictionary:</h4>
+<pre class="western"><code class="western">{</code>
+<code class="western">    </code><code class="western">'message': '000',</code>
+<code class="western">    </code><code class="western">'This': '001',</code>
+<code class="western">    </code><code class="western">'is': '002',</code>
+<code class="western">    </code><code class="western">'a': '003',</code>
+<code class="western">    </code><code class="western">'test': '004',</code>
+<code class="western">    </code><code class="western">'encoded': '005',</code>
+<code class="western">    </code><code class="western">'for': '006',</code>
+<code class="western">    </code><code class="western">'security': '007'</code>
+<code class="western">}</code></pre><h4 class="western">
+Encoded Message:</h4>
+<pre class="western" style="margin-bottom: 0.2in"><code class="western">001 002 003 004 000. 001 000 002 005 006 007.</code></pre><h4 class="western">
+Decoded Message:</h4>
+<pre class="western" style="margin-bottom: 0.2in"><code class="western">This is a test message. This message is encoded for security.</code></pre><p class="western">
+This implementation is a basic version of a dictionary-based cipher
+and can be expanded with more complex rules for splitting words into
+fragments or syllables. Let me know if you’d like to explore
+further!</p>
 <p class="western"><br/>
 <br/>
 
