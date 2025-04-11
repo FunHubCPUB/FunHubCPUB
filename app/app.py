@@ -13,6 +13,16 @@ GITHUB_REPO_DIR = '/home/Cannawesome/FunHubCPUB/'  # full path
 USERNAME = 'admin'
 PASSWORD = 'PythonAnywhere$$'
 
+def start_ssh_agent():
+    # Start the ssh-agent process and capture its output
+    result = subprocess.run(["ssh-agent", "-s"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+    # Parse and export the SSH_AUTH_SOCK and SSH_AGENT_PID variables
+    output = result.stdout
+    for line in output.splitlines():
+        if "SSH_AUTH_SOCK" in line or "SSH_AGENT_PID" in line:
+            key, value = line.split(";", 1)[0].split("=", 1)
+            os.environ[key] = value
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -44,8 +54,7 @@ def editor():
         # Commit and push to GitHub
         commit_message = f"Add page: {slug}"
         try:
-            command='eval "$ssh-agent -s"'
-            subprocess.run(command, shell=True, text=True)
+            start_ssh_agent()
             subprocess.run(['ssh-add', '/home/Cannawesome/id_rsa.pub'])
             subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'add', '.'])
             subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'commit', '-m', commit_message])
