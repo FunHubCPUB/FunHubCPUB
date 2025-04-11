@@ -44,7 +44,8 @@ def editor():
         # Commit and push to GitHub
         commit_message = f"Add page: {slug}"
         try:
-            subprocess.run(["ssh-agent", "-s"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            command="$(ssh-agent -s)"
+            subprocess.run(command, shell=True, text=True)
             subprocess.run(['ssh-add', '/home/Cannawesome/id_rsa.pub'])
             subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'add', '.'])
             subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'commit', '-m', commit_message])
