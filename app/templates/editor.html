@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Page</title>
+</head>
+<body>
+    <h1>Create a New Page</h1>
+    <form method="POST">
+        <label>Page Title:</label><br>
+        <input type="text" name="title" required><br><br>
+
+        <label>Page Slug (filename):</label><br>
+        <input type="text" name="slug" required><br><br>
+
+        <label>Page Content (HTML or plain text):</label><br>
+        <textarea name="body" rows="10" cols="60" required></textarea><br><br>
+
+        <input type="submit" value="Publish Page">
+    </form>
+
+    <br>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

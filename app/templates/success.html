@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page Published</title>
+</head>
+<body>
+    <h1>✅ Page Published!</h1>
+    <p>Your page is live at:</p>
+    <p><a href="https://yourusername.github.io/your-repo/{{ slug }}.html" target="_blank">
+        View {{ slug }}.html
+    </a></p>
+
+    <br>
+    <a href="{{ url_for('editor') }}">Create another page</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
