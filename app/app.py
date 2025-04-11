@@ -44,9 +44,12 @@ def editor():
         # Commit and push to GitHub
         commit_message = f"Add page: {slug}"
         try:
+            subprocess.run(['ssh-agent', '-s'])
+            subprocess.run(['ssh-add', '~/id_rsa.pub'])
             subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'add', '.'])
             subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'commit', '-m', commit_message])
             subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'push'])
+
         except Exception as e:
             flash(f"Git push failed: {e}")
             return redirect(url_for('editor'))
