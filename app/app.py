@@ -4,12 +4,22 @@ import subprocess
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'  # change this!
+import os
 
-# Config
-OUTPUT_DIR = 'generated_pages'
-GITHUB_REPO_DIR = '/home/Cannawesome/FunHubCPUB/'  # full path
+# Get the current directory
+current_dir = os.getcwd()
 
-# Dummy login (for demo purposes only)
+# Get the parent directory (one level up)
+parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
+
+# Define the output director, '
+OUTPUT_DIR = os.path.join(current_dir, 'generated_pages')
+
+# Define the GitHub repository directory
+GITHUB_REPO_DIR = os.path.abspath(os.path.join(current_dir, os.pardir))
+
+
+# Dummy login (for demo purposes only)pi
 USERNAME = 'admin'
 PASSWORD = 'PythonAnywhere$$'
 
@@ -43,14 +53,13 @@ def editor():
     if request.method == 'POST':
         title = request.form['title']
         slug = request.form['slug']
-        body = request.form['body']
+        body = request.form['body'].encode('utf-8')
 
         html_content = render_template('page_template.html', title=title, body=body)
 
-        filepath = os.path.join(GITHUB_REPO_DIR, f'app/generated_pages/{slug}.html')
-        with open(filepath, 'w') as f:
+        filepath = os.path.join(OUTPUT_DIR, f'{slug}.html')
+        with open(filepath, 'w', encoding='utf-8') as f:
             f.write(html_content)
-
         # Commit and push to GitHub
         commit_message = f"Add page: {slug}"
         try:
