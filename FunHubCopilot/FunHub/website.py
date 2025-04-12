@@ -1,6 +1,5 @@
-import my_packages
-from my_packages.markov import list_to_markov, sentence_tokenizer, generate_sentence
-from my_packages.urls import random_string, url_generator, link_decorator
+from app.my_packages import list_to_markov, generate_sentence
+from app.my_packages import url_generator, link_decorator
 
 pages=url_generator("http://funhub.lol", 50)
 
