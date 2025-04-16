@@ -67,7 +67,7 @@ def editor():
             subprocess.run(['ssh-add', '/home/Cannawesome/id_rsa.pub'])
             subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'add', '.'])
             subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'commit', '-m', commit_message])
-            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'push'])
+            #subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'push'])
 
         except Exception as e:
             flash(f"Git push failed: {e}")
