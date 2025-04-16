@@ -4,7 +4,6 @@ import subprocess
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'  # change this!
-import os
 
 def get_html_file_names(directory):
     """
@@ -86,7 +85,7 @@ def editor():
         # Construct the full path to the folder
 
         index_list=get_html_file_names(OUTPUT_DIR)
-        html_content_2 = render_template('index.html', pages=index_list)
+        html_content_2 = render_template('index.html', pages=index_list.reverse())
 
         filepath_2 = os.path.join(current_script_dir, 'index.html')
         with open(filepath_2, 'w', encoding='utf-8') as f:

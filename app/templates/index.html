@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Index</title>
 </head>
-    <h1>Generated Pages</h1>
+<a href="https://funhub.lol">FunHub</a>
+    <h1>Pages</h1>
     <table border="1">
         <thead>
             <tr>
@@ -15,7 +16,7 @@
         <tbody>
             {% for page in pages %}
             <tr>
-                <td>{{ page }}</td>
+                <td>{{ page.replace(".html","") }}</td>
                 <td><a href="{{ 'https://funhub.lol/app/generated_pages/' ~ page }}" target="_blank">{{page}}</a></td>
             </tr>
             {% endfor %}
