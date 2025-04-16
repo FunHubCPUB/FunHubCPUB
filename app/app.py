@@ -6,6 +6,23 @@ app = Flask(__name__)
 app.secret_key = 'your-secret-key'  # change this!
 import os
 
+def get_html_file_names(directory):
+    """
+    Get the names of all .html files in the specified directory.
+
+    Args:
+        directory (str): The path to the directory to search.
+
+    Returns:
+        list: A list of .html file names (without the directory path).
+    """
+    if not os.path.exists(directory):
+        return []
+
+    return [file for file in os.listdir(directory) if file.endswith('.html')]
+
+# Example usage
+
 # Get the current directory
 current_dir = os.getcwd()
 
@@ -53,13 +70,27 @@ def editor():
     if request.method == 'POST':
         title = request.form['title']
         slug = request.form['slug']
-        body = request.form['body'].encode('utf-8')
+        body = request.form['body']
 
-        html_content = render_template('page_template.html', title=title, body=body)
+        html_content = render_template('page_template.html', title=title, body=body.replace("\n", "<br>"))
 
         filepath = os.path.join(OUTPUT_DIR, f'{slug}.html')
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(html_content)
+
+        # Get the directory of the current script
+        current_script_dir = os.path.dirname(os.path.abspath(__file__))
+
+        # Specify the folder name
+
+        # Construct the full path to the folder
+
+        index_list=get_html_file_names(OUTPUT_DIR)
+        html_content_2 = render_template('index.html', pages=index_list)
+
+        filepath_2 = os.path.join(current_script_dir, 'index.html')
+        with open(filepath_2, 'w', encoding='utf-8') as f:
+            f.write(html_content_2)
         # Commit and push to GitHub
         commit_message = f"Add page: {slug}"
         try:
