@@ -71,7 +71,7 @@ def editor():
         slug = request.form['slug']
         body = request.form['body']
 
-        html_content = render_template('page_template.html', title=title, body=body.replace("\n", "<br>"))
+        html_content = render_template('page_template.html', title=title, body=body.replace("\n", "<br>")
 
         filepath = os.path.join(OUTPUT_DIR, f'{slug}.html')
         with open(filepath, 'w', encoding='utf-8') as f:
