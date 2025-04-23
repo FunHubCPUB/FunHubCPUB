@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for, flash
 import os
 import subprocess
+from web3 import Web3
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'  # change this!
@@ -38,6 +39,7 @@ GITHUB_REPO_DIR = os.path.abspath(os.path.join(current_dir, os.pardir))
 # Dummy login (for demo purposes only)pi
 USERNAME = 'admin'
 PASSWORD = 'PythonAnywhere$$'
+AUTHORIZED_WALLET_ADDRESS = "0x00Efde5C290c848804cAa2c7A1536644B7BD43e5"
 
 def start_ssh_agent():
     # Start the ssh-agent process and capture its output
@@ -50,16 +52,29 @@ def start_ssh_agent():
             key, value = line.split(";", 1)[0].split("=", 1)
             os.environ[key] = value
 
+# Replace with the specific Ethereum address to verify
+
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        if request.form['username'] == USERNAME and request.form['password'] == PASSWORD:
-            session['logged_in'] = True
-            return redirect(url_for('editor'))
-        else:
-            flash('Wrong username or password!')
-    return render_template('login.html')
+        if 'username' in request.form and 'password' in request.form:
+            # Handle username/password login
+            #if request.form['username'] == USERNAME and request.form['password'] == PASSWORD:
+                #session['logged_in'] = True
+                #return redirect(url_for('editor'))
+            #else:
+                #flash('Wrong username or password!')
+            flash("Please use your wallet address to login.")
+        elif 'wallet_address' in request.json:
+            # Handle wallet verification
+            wallet_address = request.json['wallet_address']
+            if Web3.is_address(wallet_address) and wallet_address.lower() == AUTHORIZED_WALLET_ADDRESS.lower():
+                session['logged_in'] = True
+                return {"status": "success", "message": "Wallet verified successfully!"}, 200
+            else:
+                return {"status": "error", "message": "Invalid wallet address!"}, 400
 
+    return render_template('login.html')
 
 @app.route('/editor', methods=['GET', 'POST'])
 def editor():
