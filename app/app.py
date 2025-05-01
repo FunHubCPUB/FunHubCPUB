@@ -68,7 +68,7 @@ def login():
         elif 'wallet_address' in request.json:
             # Handle wallet verification
             wallet_address = request.json['wallet_address']
-            if Web3.is_address(wallet_address) and wallet_address.lower() == AUTHORIZED_WALLET_ADDRESS.lower():
+            if Web3.is_address(wallet_address):
                 session['logged_in'] = True
                 return {"status": "success", "message": "Wallet verified successfully!"}, 200
             else:
