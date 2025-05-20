@@ -2,24 +2,159 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>New Page</title>
+    <title>Editor</title>
+    <!-- Google Fonts & Material Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body.material-bg {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: #f9fbe7;
+            margin: 0;
+            padding: 0;
+        }
+        .material-header {
+            background: linear-gradient(90deg, #d4ff00 0%, #fffde7 100%);
+            color: #33691e;
+            padding: 16px 0 8px 0;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(76, 175, 80, 0.08);
+        }
+        .material-container {
+            max-width: 600px;
+            margin: 32px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(205, 220, 57, 0.12);
+            padding: 32px 24px 24px 24px;
+        }
+        .material-title {
+            color: #689f38;
+            margin-bottom: 24px;
+            font-size: 2rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        .material-form label {
+            color: #afb42b;
+            font-weight: 500;
+            margin-bottom: 6px;
+            display: block;
+            font-size: 1rem;
+        }
+        .material-form input[type="text"],
+        .material-form textarea {
+            width: 100%;
+            border: 1.5px solid #d4ff00;
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 1rem;
+            margin-bottom: 18px;
+            background: #f9fbe7;
+            transition: border-color 0.2s;
+        }
+        .material-form input[type="text"]:focus,
+        .material-form textarea:focus {
+            border-color: #ffd600;
+            outline: none;
+        }
+        .material-form input[type="submit"] {
+            background: linear-gradient(90deg, #d4ff00 0%, #ffd600 100%);
+            color: #33691e;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 32px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(205, 220, 57, 0.18);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .material-form input[type="submit"]:hover {
+            background: linear-gradient(90deg, #ffd600 0%, #d4ff00 100%);
+            box-shadow: 0 4px 16px rgba(205, 220, 57, 0.28);
+        }
+        .material-messages {
+            margin-top: 18px;
+        }
+        .material-messages ul {
+            list-style: none;
+            padding: 0;
+        }
+        .material-messages li {
+            color: #d84315;
+            background: #fffde7;
+            border-left: 4px solid #ffd600;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .material-logout {
+            display: block;
+            margin: 32px auto 0 auto;
+            text-align: center;
+            color: #33691e;
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 8px 18px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #d4ff00 0%, #fffde7 100%);
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(205, 220, 57, 0.08);
+        }
+        .material-logout:hover {
+            background: linear-gradient(90deg, #ffd600 0%, #d4ff00 100%);
+            color: #689f38;
+        }
+        @media (max-width: 700px) {
+            .material-container {
+                padding: 16px 6vw 18px 6vw;
+            }
+            .material-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
-<body>
-    <h1>Create a New Page</h1>
-    <form method="POST">
-        <label>Page Title:</label><br>
-        <input type="text" name="title" required><br><br>
+<body class="material-bg">
+    <div class="material-header">
+        <a href="http://funhub.lol/" class="material-header-link" style="color:inherit;text-decoration:none;">
+            <span class="material-icons" style="vertical-align:middle;">edit</span>
+            <span style="vertical-align:middle;">Editor</span>
+        </a>
+    </div>
 
-        <label>Page Slug (filename):</label><br>
-        <input type="text" name="slug" required><br><br>
+    <div class="material-container">
+        <div class="material-title">Create a New Page</div>
+    <form method="POST" class="material-form">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required class="material-input">
 
-        <label>Page Content (HTML or plain text):</label><br>
-        <textarea name="body" rows="10" cols="60" required></textarea><br><br>
+        <label for="title">Page Title:</label>
+        <input type="text" name="title" id="title" required class="material-input">
 
-        <input type="submit" value="Publish Page">
+        <label for="body">Page Content (HTML or plain text):</label>
+        <textarea name="body" id="body" rows="10" cols="60" required class="material-textarea"></textarea>
+
+        <input type="submit" value="Publish Page" class="material-submit">
     </form>
-
-    <br>
-    <a href="{{ url_for('logout') }}">Logout</a>
+        <div class="material-messages">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        </div>
+    </div>
+    <a href="{{ url_for('logout') }}" class="material-logout">Logout</a>
 </body>
 </html>

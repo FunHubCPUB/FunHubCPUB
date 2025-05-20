@@ -1,5 +1,159 @@
 <html><head><meta charset="UTF-8"><title>Following Instructions</title></head>
-<body>
-     You want an IQ filter? Cryptocurrency. Let the points add up to posts, do it with Javascript, do it with full-stack Javascript, that'll make all your derision end. Think of the heights.<br><br>You want visibility? Is FunHub Github? Following instructions is a crucial skill for any professional worker. Every second, a block is added to the ledger. Every second, another post is made.<br><br>You might think you can't add CSS templates, you can, you can shape custom HTML apps, you can update the very code that runs your back-end with user-level control. You can send the posts across the web, make copies and distribute it, until the end of time, for a single coin, one token at a time.<br><br>You can learn what you need from a list of documents, a conversation started about the questions you have yet to answer. You can start at the bottom and rise to the top. You can read Jules Verne. You can scream. You can wait until the very end and suck the last drops from the ecosystem. <br><br>There is a very intentional process that begins once I press Publish Page. The very wire by which these contents transfer is inundated with reflexive functions that trigger a network of information to serve the public-facing data. It should cost 28 cents. You should already know what to do.<br><br>What's wrong? Can't breathe? Can't hold your breath? Top of the food chain, you lack basic needs. Stand up, and fire yourself from the franchises that you despise like Pizza Hut and hire yourself in the global marketplace of McDonald's. An all-you-can-eat pizza buffet is technically illegal.<br><br>I could tell you my password but you should already know. You don't follow instructions. <br><br>***<br><br>## 🔐 Simple Guide: Crypto Login with Flask, HTML, and MetaMask (Celo Compatible)<br><br>This guide walks you through how a user logs in using their wallet (like MetaMask) by:<br><br>1. Connecting their wallet on an HTML page.<br>2. Signing a message with their private key.<br>3. Sending the signed message to Flask.<br>4. Flask verifies the signature and logs them in.<br><br>---<br><br>## 🧠 How it Works<br><br>### On the Web Page:<br>- When users click "Connect Wallet", it uses JavaScript to talk to MetaMask.<br>- It asks MetaMask for permission to access the user's address.<br>- Then, it asks them to sign a simple message like "Sign this message to log in."<br>- That signed message proves that the user controls that wallet.<br><br>### On the Flask Backend:<br>- Flask takes the signature and original message.<br>- It uses `web3.py` to recover the address from the signature.<br>- If that recovered address matches the one the user claimed, they're authenticated.<br>- Flask can then fetch info like their wallet balance.<br><br>---<br><br>## 🧩 All the Code — One Page at a Time<br><br>---<br><br>### 📁 `app.py` — Flask App<br><br><pre><br>python<br>from flask import Flask, render_template, request, jsonify<br>from web3 import Web3<br><br>app = Flask(__name__)<br><br># Connect to the Celo blockchain (Forno = public node for mainnet)<br>web3 = Web3(Web3.HTTPProvider("https://forno.celo.org"))<br><br>@app.route("/")<br>def index():<br>    return render_template("index.html")<br><br>@app.route("/verify", methods=["POST"])<br>def verify():<br>    data = request.get_json()<br>    address = data["address"]<br>    signature = data["signature"]<br>    message = data["message"]<br><br>    # Recover address from the signed message<br>    recovered_address = web3.eth.account.recover_message(<br>        text=message,<br>        signature=signature<br>    )<br><br>    if recovered_address.lower() == address.lower():<br>        balance = web3.eth.get_balance(address)<br>        return jsonify({<br>            "status": "success",<br>            "address": address,<br>            "balance": str(web3.fromWei(balance, 'ether'))<br>        })<br>    else:<br>        return jsonify({"status": "error", "message": "Invalid signature."})<br><br>if __name__ == "__main__":<br>    app.run(debug=True)<br></pre><br><br>---<br><br>### 📁 `templates/index.html` — HTML + Jinja<br><br><pre><br>html<br><!DOCTYPE html><br><html><br><head><br>    <meta charset="UTF-8"><br>    <title>Celo Login</title><br>    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script><br></head><br><body><br>    <h1>Celo Wallet Login</h1><br>    <button id="connectWallet">Connect Wallet</button><br>    <p id="status">Not connected</p><br><br>    <script src="{{ url_for('static', filename='main.js') }}"></script><br></body><br></html><br></pre><br><br>---<br><br>### 📁 `static/main.js` — Frontend JavaScript<br><br><pre><br>javascript<br>document.getElementById("connectWallet").addEventListener("click", async () => {<br>    if (typeof window.ethereum === 'undefined') {<br>        alert("Please install MetaMask!");<br>        return;<br>    }<br><br>    const web3 = new Web3(window.ethereum);<br>    await window.ethereum.request({ method: 'eth_requestAccounts' });<br>    const accounts = await web3.eth.getAccounts();<br>    const userAddress = accounts[0];<br><br>    const message = "Sign this message to log in.";<br>    const signature = await web3.eth.personal.sign(message, userAddress);<br><br>    const res = await fetch("/verify", {<br>        method: "POST",<br>        headers: { "Content-Type": "application/json" },<br>        body: JSON.stringify({ address: userAddress, signature, message })<br>    });<br><br>    const result = await res.json();<br>    if (result.status === "success") {<br>        document.getElementById("status").innerText =<br>            `✅ Logged in as ${result.address} (Balance: ${result.balance} CELO)`;<br>    } else {<br>        document.getElementById("status").innerText = "❌ Login failed.";<br>    }<br>});<br></pre><br><br>---<br><br>## ✅ Summary<br><br>The HTML page connects to MetaMask using Web3.js. It asks the user to sign a message, then sends that to Flask. Flask checks if the signature is real by recovering the wallet address. If the signature is valid, it logs the user in and can even show their wallet balance.
+<body><p>
+     <a href="http://funhub.lol/"><font size="3" style="font-size: 12pt">Following Instructions</font></a></p>
+     You want an IQ filter? Cryptocurrency. Let the points add up to posts, do it with Javascript, do it with full-stack Javascript, that'll make all your derision end. Think of the heights.
+<br>
+<br>You want visibility? Is FunHub Github? Following instructions is a crucial skill for any professional worker. Every second, a block is added to the ledger. Every second, another post is made.
+<br>
+<br>You might think you can't add CSS templates, you can, you can shape custom HTML apps, you can update the very code that runs your back-end with user-level control. You can send the posts across the web, make copies and distribute it, until the end of time, for a single coin, one token at a time.
+<br>
+<br>You can learn what you need from a list of documents, a conversation started about the questions you have yet to answer. You can start at the bottom and rise to the top. You can read Jules Verne. You can scream. You can wait until the very end and suck the last drops from the ecosystem. 
+<br>
+<br>There is a very intentional process that begins once I press Publish Page. The very wire by which these contents transfer is inundated with reflexive functions that trigger a network of information to serve the public-facing data. It should cost 28 cents. You should already know what to do.
+<br>
+<br>What's wrong? Can't breathe? Can't hold your breath? Top of the food chain, you lack basic needs. Stand up, and fire yourself from the franchises that you despise like Pizza Hut and hire yourself in the global marketplace of McDonald's. An all-you-can-eat pizza buffet is technically illegal.
+<br>
+<br>I could tell you my password but you should already know. You don't follow instructions. 
+<br>
+<br>***
+<br>
+<br>## 🔐 Simple Guide: Crypto Login with Flask, HTML, and MetaMask (Celo Compatible)
+<br>
+<br>This guide walks you through how a user logs in using their wallet (like MetaMask) by:
+<br>
+<br>1. Connecting their wallet on an HTML page.
+<br>2. Signing a message with their private key.
+<br>3. Sending the signed message to Flask.
+<br>4. Flask verifies the signature and logs them in.
+<br>
+<br>---
+<br>
+<br>## 🧠 How it Works
+<br>
+<br>### On the Web Page:
+<br>- When users click "Connect Wallet", it uses JavaScript to talk to MetaMask.
+<br>- It asks MetaMask for permission to access the user's address.
+<br>- Then, it asks them to sign a simple message like "Sign this message to log in."
+<br>- That signed message proves that the user controls that wallet.
+<br>
+<br>### On the Flask Backend:
+<br>- Flask takes the signature and original message.
+<br>- It uses `web3.py` to recover the address from the signature.
+<br>- If that recovered address matches the one the user claimed, they're authenticated.
+<br>- Flask can then fetch info like their wallet balance.
+<br>
+<br>---
+<br>
+<br>## 🧩 All the Code — One Page at a Time
+<br>
+<br>---
+<br>
+<br>### 📁 `app.py` — Flask App
+<br>
+<br><pre>
+<br>python
+<br>from flask import Flask, render_template, request, jsonify
+<br>from web3 import Web3
+<br>
+<br>app = Flask(__name__)
+<br>
+<br># Connect to the Celo blockchain (Forno = public node for mainnet)
+<br>web3 = Web3(Web3.HTTPProvider("https://forno.celo.org"))
+<br>
+<br>@app.route("/")
+<br>def index():
+<br>    return render_template("index.html")
+<br>
+<br>@app.route("/verify", methods=["POST"])
+<br>def verify():
+<br>    data = request.get_json()
+<br>    address = data["address"]
+<br>    signature = data["signature"]
+<br>    message = data["message"]
+<br>
+<br>    # Recover address from the signed message
+<br>    recovered_address = web3.eth.account.recover_message(
+<br>        text=message,
+<br>        signature=signature
+<br>    )
+<br>
+<br>    if recovered_address.lower() == address.lower():
+<br>        balance = web3.eth.get_balance(address)
+<br>        return jsonify({
+<br>            "status": "success",
+<br>            "address": address,
+<br>            "balance": str(web3.fromWei(balance, 'ether'))
+<br>        })
+<br>    else:
+<br>        return jsonify({"status": "error", "message": "Invalid signature."})
+<br>
+<br>if __name__ == "__main__":
+<br>    app.run(debug=True)
+<br></pre>
+<br>
+<br>---
+<br>
+<br>### 📁 `templates/index.html` — HTML + Jinja
+<br>
+<br><pre>
+<br>html
+<br><!DOCTYPE html>
+<br><html>
+<br><head>
+<br>    <meta charset="UTF-8">
+<br>    <title>Celo Login</title>
+<br>    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<br></head>
+<br><body>
+<br>    <h1>Celo Wallet Login</h1>
+<br>    <button id="connectWallet">Connect Wallet</button>
+<br>    <p id="status">Not connected</p>
+<br>
+<br>    <script src="{{ url_for('static', filename='main.js') }}"></script>
+<br></body>
+<br></html>
+<br></pre>
+<br>
+<br>---
+<br>
+<br>### 📁 `static/main.js` — Frontend JavaScript
+<br>
+<br><pre>
+<br>javascript
+<br>document.getElementById("connectWallet").addEventListener("click", async () => {
+<br>    if (typeof window.ethereum === 'undefined') {
+<br>        alert("Please install MetaMask!");
+<br>        return;
+<br>    }
+<br>
+<br>    const web3 = new Web3(window.ethereum);
+<br>    await window.ethereum.request({ method: 'eth_requestAccounts' });
+<br>    const accounts = await web3.eth.getAccounts();
+<br>    const userAddress = accounts[0];
+<br>
+<br>    const message = "Sign this message to log in.";
+<br>    const signature = await web3.eth.personal.sign(message, userAddress);
+<br>
+<br>    const res = await fetch("/verify", {
+<br>        method: "POST",
+<br>        headers: { "Content-Type": "application/json" },
+<br>        body: JSON.stringify({ address: userAddress, signature, message })
+<br>    });
+<br>
+<br>    const result = await res.json();
+<br>    if (result.status === "success") {
+<br>        document.getElementById("status").innerText =
+<br>            `✅ Logged in as ${result.address} (Balance: ${result.balance} CELO)`;
+<br>    } else {
+<br>        document.getElementById("status").innerText = "❌ Login failed.";
+<br>    }
+<br>});
+<br></pre>
+<br>
+<br>---
+<br>
+<br>## ✅ Summary
+<br>
+<br>The HTML page connects to MetaMask using Web3.js. It asks the user to sign a message, then sends that to Flask. Flask checks if the signature is real by recovering the wallet address. If the signature is valid, it logs the user in and can even show their wallet balance.
 </body>
 </html>

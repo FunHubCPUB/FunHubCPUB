@@ -2,17 +2,142 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Page Published</title>
+    <title>Page Published & NFT Minted</title>
+    <!-- Google Fonts & Material Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body.material-bg {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: #f9fbe7;
+            margin: 0;
+            padding: 0;
+        }
+        .material-header {
+            background: linear-gradient(90deg, #d4ff00 0%, #fffde7 100%);
+            color: #33691e;
+            padding: 16px 0 8px 0;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(76, 175, 80, 0.08);
+        }
+        .material-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(205, 220, 57, 0.12);
+            padding: 32px 24px 24px 24px;
+            text-align: center;
+        }
+        .material-title {
+            color: #689f38;
+            margin-bottom: 18px;
+            font-size: 2rem;
+            font-weight: 500;
+        }
+        .material-success {
+            color: #33691e;
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .material-link {
+            color: #afb42b;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            display: inline-block;
+            transition: color 0.2s;
+        }
+        .material-link:hover {
+            color: #ffd600;
+        }
+        .material-details {
+            background: #fffde7;
+            border-radius: 8px;
+            padding: 16px 12px;
+            color: #444;
+            font-size: 1.05rem;
+            margin: 18px 0;
+            box-shadow: 0 2px 8px rgba(205, 220, 57, 0.10);
+            text-align: left;
+            display: inline-block;
+        }
+        .material-actions {
+            margin-top: 24px;
+        }
+        .material-action-link {
+            color: #33691e;
+            background: linear-gradient(90deg, #d4ff00 0%, #ffd600 100%);
+            border-radius: 6px;
+            padding: 10px 22px;
+            font-weight: 500;
+            text-decoration: none;
+            margin: 0 8px;
+            transition: background 0.2s, color 0.2s;
+            box-shadow: 0 2px 8px rgba(205, 220, 57, 0.08);
+            display: inline-block;
+        }
+        .material-action-link:hover {
+            background: linear-gradient(90deg, #ffd600 0%, #d4ff00 100%);
+            color: #689f38;
+        }
+        @media (max-width: 600px) {
+            .material-container {
+                padding: 16px 4vw 18px 4vw;
+            }
+            .material-title {
+                font-size: 1.3rem;
+            }
+            .material-details {
+                font-size: 0.98rem;
+                padding: 10px 4px;
+            }
+        }
+    </style>
 </head>
-<body>
-    <h1>✅ Page Published!</h1>
-    <p>Your page is live at:</p>
-    <p><a href="https://funhub.lol/app/generated_pages/{{ slug }}.html" target="_blank">
-        View {{ slug }}.html
-    </a></p>
-
-    <br>
-    <a href="{{ url_for('editor') }}">Create another page</a> |
-    <a href="{{ url_for('logout') }}">Logout</a>
+<body class="material-bg">
+    <div class="material-header">
+        <span class="material-icons" style="vertical-align:middle;">check_circle</span>
+        <span style="vertical-align:middle;">Success</span>
+    </div>
+    <div class="material-container">
+        <div class="material-title">✅ Page Published & NFT Minted!</div>
+        <div class="material-success">Your page is live at:</div>
+        <a href="https://funhub.lol/app/nfts.html" class="material-link" target="_blank">
+            <span class="material-icons" style="vertical-align:middle;">collections</span>
+            NFTs
+        </a>
+        {% if tx_hash and gas_fee_eth %}
+        <div class="material-details">
+            <strong>NFT Minted!</strong><br>
+            Token ID: {{ token_id }}<br>
+            Transaction:
+            <a href="https://celoscan.io/tx/{{ tx_hash }}" target="_blank" class="material-link">{{ tx_hash }}</a><br>
+            Gas Fee: {{ gas_fee_eth }} CELO<br>
+            {% if cpub_tx_hash %}
+            <hr>
+            <strong>CPUB Token Sent!</strong><br>
+            Transaction:
+            <a href="https://celoscan.io/tx/{{ cpub_tx_hash }}" target="_blank" class="material-link">{{ cpub_tx_hash }}</a><br>
+            {% endif %}
+            {% if receipt %}
+            <hr>
+            <details>
+                <summary style="cursor:pointer;">Show Raw Receipt</summary>
+                <pre style="font-size:0.9em;white-space:pre-wrap;">{{ receipt }}</pre>
+            </details>
+            {% endif %}
+        </div>
+        {% endif %}
+        <div class="material-actions">
+            <a href="{{ url_for('editor') }}" class="material-action-link">Create another page</a>
+            <a href="{{ url_for('logout') }}" class="material-action-link">Logout</a>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,1 +1,4 @@
 /.venv/
+FunHubCopilot/.env
+app/.env
+.env

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FUN_NFT Collection</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body.material-bg {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #f9fbe7 0%, #e0f7fa 100%);
+            margin: 0;
+            padding: 0;
+        }
+        .material-header {
+            background: linear-gradient(90deg, #d4ff00 0%, #fffde7 100%);
+            color: #33691e;
+            padding: 24px 0 12px 0;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.12);
+        }
+        .material-link {
+            color: #388e3c;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            display: inline-block;
+            transition: color 0.2s;
+        }
+        .material-link:hover {
+            color: #ffd600;
+            text-decoration: underline;
+        }
+        .material-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(205, 220, 57, 0.18);
+            padding: 40px 32px 32px 32px;
+        }
+        .material-title {
+            color: #689f38;
+            margin-bottom: 32px;
+            font-size: 2.4rem;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 1.5px;
+        }
+        .nft-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nft-card {
+            background: linear-gradient(120deg, #fffde7 60%, #e0f2f1 100%);
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(205, 220, 57, 0.13);
+            margin-bottom: 32px;
+            padding: 28px 32px 20px 32px;
+            transition: box-shadow 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .nft-card:hover {
+            box-shadow: 0 8px 32px rgba(205, 220, 57, 0.22);
+            transform: translateY(-2px) scale(1.01);
+        }
+        .nft-icon {
+            font-size: 3.2rem;
+            color: #afb42b;
+            margin-right: 24px;
+        }
+        .nft-info-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex: 1;
+        }
+        .nft-info-list li {
+            margin-bottom: 12px;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+        }
+        .nft-label {
+            font-weight: 600;
+            color: #33691e;
+            min-width: 110px;
+            display: inline-block;
+        }
+        .nft-value {
+            color: #444;
+            margin-left: 8px;
+            word-break: break-all;
+        }
+        .nft-link-btn {
+            background: linear-gradient(90deg, #d4ff00 0%, #b2ff59 100%);
+            color: #33691e;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 22px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 2px 8px rgba(205, 220, 57, 0.13);
+            transition: background 0.2s, color 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nft-link-btn:hover {
+            background: linear-gradient(90deg, #ffd600 0%, #d4ff00 100%);
+            color: #222;
+        }
+        @media (max-width: 700px) {
+            .material-container {
+                padding: 16px 2vw 18px 2vw;
+            }
+            .material-title {
+                font-size: 1.3rem;
+            }
+            .nft-card {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 18px 8px 14px 8px;
+            }
+            .nft-icon {
+                margin: 0 0 12px 0;
+            }
+        }
+    </style>
+</head>
+<body class="material-bg">
+    <div class="material-header">
+        <a href="http://funhub.lol/" class="material-link" style="color:inherit;text-decoration:none;">
+            <span class="material-icons" style="vertical-align:middle;">collections</span>
+            <span style="vertical-align:middle;">NFTs</span>
+        </a>
+    </div>
+    <div class="material-container">
+        <div class="material-title">FUN_NFT Collection</div>
+        <ul class="nft-list">
+                </ul>
+                
+                    <a href="https://funhub.lol/app/html/-1.html" class="nft-link-btn" target="_blank">
+                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
+                        View NFT
+                    </a>
+                
+            </li>
+        
+        </ul>
+    </div>
+</body>
+</html>

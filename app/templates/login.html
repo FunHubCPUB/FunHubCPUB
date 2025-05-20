@@ -3,34 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <!-- Google Fonts & Material Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body.material-bg {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: #f9fbe7;
+            margin: 0;
+            padding: 0;
+        }
+        .material-header {
+            background: linear-gradient(90deg, #d4ff00 0%, #fffde7 100%);
+            color: #33691e;
+            padding: 16px 0 8px 0;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(76, 175, 80, 0.08);
+        }
+        .material-container {
+            max-width: 400px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(205, 220, 57, 0.12);
+            padding: 32px 24px 24px 24px;
+            text-align: center;
+        }
+        .material-title {
+            color: #689f38;
+            margin-bottom: 16px;
+            font-size: 2rem;
+            font-weight: 500;
+        }
+        .material-subtitle {
+            color: #afb42b;
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+        .material-btn {
+            background: linear-gradient(90deg, #d4ff00 0%, #ffd600 100%);
+            color: #33691e;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 32px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 12px 0;
+            box-shadow: 0 2px 8px rgba(205, 220, 57, 0.18);
+            transition: background 0.2s, box-shadow 0.2s;
+            display: block;
+            width: 100%;
+        }
+        .material-btn:hover {
+            background: linear-gradient(90deg, #ffd600 0%, #d4ff00 100%);
+            box-shadow: 0 4px 16px rgba(205, 220, 57, 0.28);
+        }
+        .material-status {
+            margin: 10px 0 18px 0;
+            color: #33691e;
+            font-size: 1rem;
+            min-height: 24px;
+        }
+        .material-messages {
+            margin-top: 18px;
+        }
+        .material-messages ul {
+            list-style: none;
+            padding: 0;
+        }
+        .material-messages li {
+            color: #d84315;
+            background: #fffde7;
+            border-left: 4px solid #ffd600;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .material-link {
+            color: #689f38;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            display: inline-block;
+        }
+        @media (max-width: 500px) {
+            .material-container {
+                padding: 16px 4vw 18px 4vw;
+            }
+            .material-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
-<body>
-    <h1>Welcome Back</h1>
-    <form method="POST">
-        <label>Username:</label><br>
-        <input type="text" name="username"><br><br>
-
-        <label>Password:</label><br>
-        <input type="password" name="password"><br><br>
-
-        <input type="submit" value="Login">
-    </form>
-  <h1>Celo Wallet Login</h1>
-    <button id="switchNetwork">Switch to Celo Network</button>
-<div id="status"></div>
-    <button id="connectWallet">Connect Wallet</button>
-    <p id="status">Not connected</p>
-
+<body class="material-bg">
+    <div class="material-header">
+        <a href="http://funhub.lol/" class="material-link" style="color:inherit;text-decoration:none;">
+            <span class="material-icons" style="vertical-align:middle;">login</span>
+            <span style="vertical-align:middle;">Login</span>
+        </a>
+    </div>
+    <div class="material-container">
+        <div class="material-title">Welcome Back</div>
+        <div class="material-subtitle">Celo Wallet Login</div>
+        <button id="switchNetwork" class="material-btn">Switch to Celo Network</button>
+        <button id="connectWallet" class="material-btn">Connect Wallet</button>
+        <div id="status" class="material-status"></div>
+        <div class="material-messages">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        </div>
+    </div>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-            <li style="color: red;">{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
 </body>
 </html>
