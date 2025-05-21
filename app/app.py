@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # Load private key for minting (should be the owner's key)
 # Add variables to a .env file in this directory
-OWNER_ADDRESS = os.getenv('WALLET_ADDRESS')
+OWNER_ADDRESS = Web3.to_checksum_address(os.getenv('WALLET_ADDRESS'))
 PRIVATE_KEY = os.getenv('PRIVATE_KEY')
 FUNNFT_ADDRESS = os.getenv('FUNNFT_ADDRESS')  # Set this in your .env or config
 CELO_RPC = os.getenv("CELO_RPC")
@@ -49,7 +49,7 @@ def login():
             wallet_address = request.json['wallet_address']
             if Web3.is_address(wallet_address):
                 session['logged_in'] = True
-                session['wallet_address'] = wallet_address
+                session['wallet_address'] = Web3.to_checksum_address(wallet_address.lower())
                 return {"status": "success", "message": "Wallet verified successfully!"}, 200
             else:
                 return {"status": "error", "message": "Invalid wallet address!"}, 400
@@ -163,7 +163,7 @@ def mint_and_return_receipt(title, description):
         ).build_transaction({
             'from': account.address,
             'nonce': nonce,
-            'gas': 500000,
+            'gas': 800000,
             'gasPrice': w3.eth.gas_price
         })
         signed_txn = w3.eth.account.sign_transaction(txn, private_key=PRIVATE_KEY)
@@ -201,9 +201,11 @@ def mint_and_return_receipt(title, description):
 
         return tx_hash_hex, gas_fee_eth, receipt, token_id, cpub_tx_hash_hex
     except Exception as e:
+        import traceback
         print(f"Error minting NFT or CPUB token: {e}")
+        traceback.print_exc()
         return None, None, None, None, None
-    
+
 def get_html_file_names(directory):
     """
     Get the names of all .html files in the specified directory.
