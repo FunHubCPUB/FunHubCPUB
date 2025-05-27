@@ -73,8 +73,8 @@ def editor():
             json_content = {
                 "name": title,
                 "description": body,
-                "image": f"https://funhub.lol/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg",  # or your actual image URL logic
-                "external_url": f"https://funhub.lol/html/{token_id}.html",
+                "image": f"https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg",  # or your actual image URL logic
+                "external_url": f"https://funhub.lol/app/html/{token_id}.html",
                 "attributes": [
                     {"trait_type": "Creator", "value": username},
                     {"trait_type": "Wallet", "value": wallet_address},
