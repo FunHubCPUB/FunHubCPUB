@@ -68,7 +68,7 @@ def editor():
 
         # Mint NFT and get token id
         # Mint NFT and get token id
-        tx_hash, gas_fee_eth, receipt, token_id, cpub_tx_hash = mint_and_return_receipt(title, body)        
+        tx_hash, gas_fee_eth, receipt, token_id, cpub_tx_hash = mint_and_return_receipt(title, body)
         if tx_hash:
             json_content = {
                 "name": title,
@@ -127,15 +127,14 @@ def editor():
 #                subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'add', '.'], check=True)
 #                subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'commit', '-m', commit_message], check=True)
 #                subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'push'], check=True)
-#                return render_template('success.html', title=title, tx_hash=tx_hash, gas_fee=gas_fee_eth)
 #            except Exception as e:
 #                flash(f"Git push failed: {e}")
 #                return render_template('error.html', error_message="Git push failed.")
-            return render_template('success.html', tx_hash=tx_hash, gas_fee_eth=gas_fee_eth, receipt=receipt, token_id=token_id, cpub_tx_hash=cpub_tx_hash)
+#            return render_template('success.html', tx_hash=tx_hash, gas_fee_eth=gas_fee_eth, receipt=receipt, token_id=token_id, cpub_tx_hash=cpub_tx_hash)
 
-        else:
-            flash("NFT minting failed.")
-            return redirect(url_for('editor'))
+ #       else:
+#            flash("NFT minting failed.")
+#            return redirect(url_for('editor'))
     return render_template('editor.html')
 
 @app.route('/logout')
@@ -184,7 +183,7 @@ def mint_and_return_receipt(title, description):
                     continue
         if token_id is None:
             # fallback: get nextTokenId - 1
-            token_id = funnft_contract.functions.nextTokenId().call() 
+            token_id = funnft_contract.functions.nextTokenId().call()
         if not wallet_address or not Web3.is_address(wallet_address):
             raise Exception("Invalid or missing wallet address in session.")
         # Mint 1 CPUB token to the wallet address (no decimals, only 1, 10, or 100 allowed)
