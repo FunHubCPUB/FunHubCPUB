@@ -1,0 +1,20 @@
+{
+  "name": "Planet 8: Solar System",
+  "description": "8. Uranus\r\n7. Neptune\r\n6. Saturn\r\n5. Jupiter\r\n4. Mars\r\n3. Earth\r\n2. Venus\r\n1. Mercury\r\n---\r\n1. Venus Mercury\r\n2. Earth Mars\r\n3. Jupiter Saturn\r\n4. Neptune Uranus\r\n---\r\n2 - Earth - 3 - Neptune 1\r\n---\r\n1. Mercury 2. Venus\r\n3. Mars 4. Jupiter 5. Saturn\r\n6. Uranus\r\n---\r\nA 6 planet system outside the solar system's biological sphere of influence excluding Earth and Neptune exists. These lifeless planets have been lifeless for the entire duration of their existence. Only Earth has ever hosted life. The final planet, Neptune...\r\n---\r\n\r\nNeptune and Uranus are often grouped together as ice giants, but they have some fascinating differences! \r\n\r\n- Color: Neptune appears a deep blue, while Uranus is a pale cyan. This is due to differences in their atmospheric haze\u2014Neptune's more active atmosphere churns up methane particles, making its blue color more intense.\r\n- Moons: Uranus has 27 moons, while Neptune has 14.\r\n- Axial Tilt: Uranus is tilted at 98 degrees, meaning it essentially rolls around the Sun on its side. Neptune, by contrast, has a more typical 28-degree tilt.\r\n- Winds: Neptune has the fastest winds in the solar system, reaching speeds of over 2,000 km/h\u2014far stronger than Earth's hurricanes.\r\n- Orbital Period: Uranus takes 84 years to orbit the Sun, while Neptune takes 165 years.\r\n\r\nDespite their similarities, these two distant worlds have unique characteristics that make them stand out in our solar system! \r\n\r\nPluto was officially demoted from planet status in 2006, meaning it has not been considered a planet for about 19 years. The decision was made by the International Astronomical Union (IAU), which established a new definition of what qualifies as a planet.\r\n\r\nTo be classified as a planet, an object must:\r\n1. Orbit the Sun.\r\n2. Be large enough for gravity to shape it into a sphere.\r\n3. Clear its orbital neighborhood of other objects.\r\n\r\nPluto meets the first two criteria but fails the third\u2014its orbit is cluttered with other objects in the Kuiper Belt, meaning it does not dominate its orbital path. As a result, Pluto was reclassified as a dwarf planet, a category that includes other small celestial bodies beyond Neptune.\r\n\r\nDespite the change, Pluto remains a fascinating world with mountains, valleys, and even a heart-shaped glacier on its surface. Some astronomers still debate whether Pluto should regain its planetary status, but for now, it remains a dwarf planet.",
+  "image": "https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg",
+  "external_url": "https://funhub.lol/app/html/13.html",
+  "attributes": [
+    {
+      "trait_type": "Creator",
+      "value": "Felix"
+    },
+    {
+      "trait_type": "Wallet",
+      "value": "0x00Efde5C290c848804cAa2c7A1536644B7BD43e5"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 13
+    }
+  ]
+}
