@@ -7,6 +7,27 @@ import json
 from dotenv import load_dotenv
 load_dotenv()
 
+import urllib.parse
+
+def download_image(image_url):
+    if image_url.startswith("https"):
+        # Ensure images directory exists
+        os.makedirs("images", exist_ok=True)
+
+        # Extract filename from URL
+        parsed_url = urllib.parse.urlparse(image_url)
+        filename = os.path.basename(parsed_url.path).replace(":", "_")  # Replace colon for valid filenames
+        filepath = os.path.join("images", filename + ".jpg")  # Adjust extension if needed
+        link = "https://funhub.lol/app/images/"+filename
+        # Use curl in subprocess to download the image
+        try:
+            subprocess.run(["curl", "-o", filepath, image_url], check=True)
+            print(f"Image saved as {filepath}")
+            return link
+        except subprocess.CalledProcessError as e:
+            print(f"Download failed: {e}")
+    else:
+        print("Invalid URL: must start with https")
 app = Flask(__name__)
 
 # Load private key for minting (should be the owner's key)
@@ -80,7 +101,9 @@ def editor():
 # Choose image source based on URL security
         if starts_with_https(body):
             print("It's a secure URL.")
-            image_url = body
+            image_url = download_image(body)
+
+
         else:
             image_url = "https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg"
 
@@ -131,15 +154,15 @@ def editor():
 
         # 4. Git commit and push
         commit_message = f"Add page: {title}"
-        try:
-            start_ssh_agent()
-            subprocess.run(['ssh-add', RSA_LOCATION], check=True)
-            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'add', '.'], check=True)
-            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'commit', '-m', commit_message], check=True)
-            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'push'], check=True)
-        except Exception as e:
-            flash(f"Git push failed: {e}")
-            return render_template('error.html', error_message="Git push failed.")
+#        try:
+#            start_ssh_agent()
+#            subprocess.run(['ssh-add', RSA_LOCATION], check=True)
+#            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'add', '.'], check=True)
+#            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'commit', '-m', commit_message], check=True)
+#            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'push'], check=True)
+#        except Exception as e:
+#            flash(f"Git push failed: {e}")
+#            return render_template('error.html', error_message="Git push failed.")
 
         return render_template('success.html', tx_hash=tx_hash, gas_fee_eth=gas_fee_eth, receipt=receipt, token_id=token_id, cpub_tx_hash=cpub_tx_hash)
     return render_template('editor.html')
