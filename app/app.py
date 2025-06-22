@@ -54,6 +54,8 @@ def login():
             else:
                 return {"status": "error", "message": "Invalid wallet address!"}, 400
     return render_template('login.html')
+def starts_with_https(url):
+    return url.startswith('https://')
 
 @app.route('/editor', methods=['GET', 'POST'])
 def editor():
@@ -69,72 +71,77 @@ def editor():
         # Mint NFT and get token id
         # Mint NFT and get token id
         tx_hash, gas_fee_eth, receipt, token_id, cpub_tx_hash = mint_and_return_receipt(title, body)
-        if tx_hash:
-            json_content = {
-                "name": title,
-                "description": body,
-                "image": f"https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg",  # or your actual image URL logic
-                "external_url": f"https://funhub.lol/app/html/{token_id}.html",
-                "attributes": [
-                    {"trait_type": "Creator", "value": username},
-                    {"trait_type": "Wallet", "value": wallet_address},
-                    {"trait_type": "Token ID", "value": token_id}
-                ]
-            }
-            # 1. Write NFT metadata to a JSON file in JSON_DIR
-            json_filename = f"{token_id}.json"
-            json_path = os.path.join(JSON_DIR, json_filename)
-            with open(json_path, "w", encoding="utf-8") as json_file:
-                json.dump(json_content, json_file, indent=2)
 
-            # 2. Write an HTML file in html directory with page_template.html
-            html_filename = f"{token_id}.html"
-            html_path = os.path.join(OUTPUT_DIR, html_filename)
-            html_content = render_template(
-                'page_template.html',
-                title=title,
-                body=body,
-                username=username,
-                wallet_address=wallet_address,
-                token_id=token_id
-            )
-            with open(html_path, "w", encoding="utf-8") as html_file:
-                html_file.write(html_content)
 
-            # 3. Write nfts.html with all NFT entries from JSON_DIR
-            index_list = get_json_file_names(JSON_DIR)
-            nft_entries = []
-            for entry in index_list:
-                entry_path = os.path.join(JSON_DIR, entry)
-                try:
-                    with open(entry_path, mode="r", encoding="utf-8") as f:
-                        nft_entry = json.load(f)
-                        nft_entries.append(nft_entry)
-                except Exception as e:
-                    print(f"Error loading {entry_path}: {e}")
-            nft_entries_sorted = sorted(nft_entries, key=get_token_id, reverse=True)
+        if not tx_hash:
+            flash("NFT minting failed.")
+            return redirect(url_for('editor'))
 
-            nfts_html_content = render_template('nfts.html', entries=nft_entries_sorted)
-            nfts_html_path = os.path.join(current_dir, 'nfts.html')
-            with open(nfts_html_path, 'w', encoding='utf-8') as f:
-                f.write(nfts_html_content)
+# Choose image source based on URL security
+        if starts_with_https(body):
+            print("It's a secure URL.")
+            image_url = body
+        else:
+            image_url = "https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg"
 
-            commit_message = f"Add page: {title}"
+# Build JSON metadata
+        json_content = {
+            "name": title,
+            "description": body,
+            "image": image_url,
+            "external_url": f"https://funhub.lol/app/html/{token_id}.html",
+            "attributes": [
+                {"trait_type": "Creator", "value": username},
+                {"trait_type": "Wallet", "value": wallet_address},
+                {"trait_type": "Token ID", "value": token_id}
+            ]
+        }
 
-#            try:
-#                start_ssh_agent()
-#                subprocess.run(['ssh-add', RSA_LOCATION], check=True)
-#                subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'add', '.'], check=True)
-#                subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'commit', '-m', commit_message], check=True)
-#                subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'push'], check=True)
-#            except Exception as e:
-#                flash(f"Git push failed: {e}")
-#                return render_template('error.html', error_message="Git push failed.")
-#            return render_template('success.html', tx_hash=tx_hash, gas_fee_eth=gas_fee_eth, receipt=receipt, token_id=token_id, cpub_tx_hash=cpub_tx_hash)
+        # 1. Write JSON metadata file
+        json_path = os.path.join(JSON_DIR, f"{token_id}.json")
+        with open(json_path, "w", encoding="utf-8") as json_file:
+            json.dump(json_content, json_file, indent=2)
 
- #       else:
-#            flash("NFT minting failed.")
-#            return redirect(url_for('editor'))
+        # 2. Generate HTML page
+        html_path = os.path.join(OUTPUT_DIR, f"{token_id}.html")
+        html_content = render_template(
+            'page_template.html',
+            title=title,
+            body=body,
+            username=username,
+            wallet_address=wallet_address,
+            token_id=token_id
+        )
+        with open(html_path, "w", encoding="utf-8") as html_file:
+            html_file.write(html_content)
+
+        # 3. Generate NFT index HTML
+        nft_entries = []
+        for entry in get_json_file_names(JSON_DIR):
+            try:
+                with open(os.path.join(JSON_DIR, entry), "r", encoding="utf-8") as f:
+                    nft_entries.append(json.load(f))
+            except Exception as e:
+                print(f"Error loading {entry}: {e}")
+
+        nft_entries_sorted = sorted(nft_entries, key=get_token_id, reverse=True)
+        nfts_html_path = os.path.join(current_dir, 'nfts.html')
+        with open(nfts_html_path, "w", encoding="utf-8") as f:
+            f.write(render_template('nfts.html', entries=nft_entries_sorted))
+
+        # 4. Git commit and push
+        commit_message = f"Add page: {title}"
+        try:
+            start_ssh_agent()
+            subprocess.run(['ssh-add', RSA_LOCATION], check=True)
+            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'add', '.'], check=True)
+            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'commit', '-m', commit_message], check=True)
+            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'push'], check=True)
+        except Exception as e:
+            flash(f"Git push failed: {e}")
+            return render_template('error.html', error_message="Git push failed.")
+
+        return render_template('success.html', tx_hash=tx_hash, gas_fee_eth=gas_fee_eth, receipt=receipt, token_id=token_id, cpub_tx_hash=cpub_tx_hash)
     return render_template('editor.html')
 
 @app.route('/logout')
