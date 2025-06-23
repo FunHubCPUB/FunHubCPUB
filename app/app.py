@@ -6,8 +6,11 @@ from web3 import Web3
 import json
 from dotenv import load_dotenv
 load_dotenv()
-
+from werkzeug.utils import secure_filename
 import urllib.parse
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def download_image(image_url):
     if image_url.startswith("https"):
@@ -17,7 +20,7 @@ def download_image(image_url):
         # Extract filename from URL
         parsed_url = urllib.parse.urlparse(image_url)
         filename = os.path.basename(parsed_url.path).replace(":", "_")  # Replace colon for valid filenames
-        filepath = os.path.join("images", filename + ".jpg")  # Adjust extension if needed
+        filepath = os.path.join("images", filename )  # Adjust extension if needed
         link = "https://funhub.lol/app/images/"+filename
         # Use curl in subprocess to download the image
         try:
@@ -29,6 +32,10 @@ def download_image(image_url):
     else:
         print("Invalid URL: must start with https")
 app = Flask(__name__)
+UPLOAD_FOLDER = 'images'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Load private key for minting (should be the owner's key)
 # Add variables to a .env file in this directory
@@ -89,28 +96,27 @@ def editor():
         username = request.form['username']
         wallet_address = request.form.get('wallet_address') or session.get('wallet_address')
 
-        # Mint NFT and get token id
-        # Mint NFT and get token id
-        tx_hash, gas_fee_eth, receipt, token_id, cpub_tx_hash = mint_and_return_receipt(title, body)
+        # 🔽 Handle File Upload
+        file = request.files.get('file')
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath)
+            image_url = 'https://funhub.lol/app/images/'+filename
+        else:
+            image_url = "https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg"
 
+        # 🪙 Mint NFT
+        tx_hash, gas_fee_eth, receipt, token_id, cpub_tx_hash = mint_and_return_receipt(title, body)
 
         if not tx_hash:
             flash("NFT minting failed.")
             return redirect(url_for('editor'))
 
-# Choose image source based on URL security
-        if starts_with_https(body):
-            print("It's a secure URL.")
-            image_url = download_image(body)
-
-
-        else:
-            image_url = "https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg"
-
-# Build JSON metadata
+        # 📦 JSON Metadata
         json_content = {
             "name": title,
-            "description": body,
+            "description":image_url+" \r\n \r\n "+ body,
             "image": image_url,
             "external_url": f"https://funhub.lol/app/html/{token_id}.html",
             "attributes": [
@@ -119,26 +125,19 @@ def editor():
                 {"trait_type": "Token ID", "value": token_id}
             ]
         }
+        with open(os.path.join(JSON_DIR, f"{token_id}.json"), "w", encoding="utf-8") as f:
+            json.dump(json_content, f, indent=2)
 
-        # 1. Write JSON metadata file
-        json_path = os.path.join(JSON_DIR, f"{token_id}.json")
-        with open(json_path, "w", encoding="utf-8") as json_file:
-            json.dump(json_content, json_file, indent=2)
+        # 🧾 HTML Page Generation
+        with open(os.path.join(OUTPUT_DIR, f"{token_id}.html"), "w", encoding="utf-8") as f:
+            f.write(render_template('page_template.html', image=image_url,
+                                    title=title,
+                                    body=body,
+                                    username=username,
+                                    wallet_address=wallet_address,
+                                    token_id=token_id))
 
-        # 2. Generate HTML page
-        html_path = os.path.join(OUTPUT_DIR, f"{token_id}.html")
-        html_content = render_template(
-            'page_template.html',
-            title=title,
-            body=body,
-            username=username,
-            wallet_address=wallet_address,
-            token_id=token_id
-        )
-        with open(html_path, "w", encoding="utf-8") as html_file:
-            html_file.write(html_content)
-
-        # 3. Generate NFT index HTML
+        # 🔍 NFT Index Page
         nft_entries = []
         for entry in get_json_file_names(JSON_DIR):
             try:
@@ -146,26 +145,15 @@ def editor():
                     nft_entries.append(json.load(f))
             except Exception as e:
                 print(f"Error loading {entry}: {e}")
-
         nft_entries_sorted = sorted(nft_entries, key=get_token_id, reverse=True)
-        nfts_html_path = os.path.join(current_dir, 'nfts.html')
-        with open(nfts_html_path, "w", encoding="utf-8") as f:
+        with open(os.path.join(current_dir, 'nfts.html'), "w", encoding="utf-8") as f:
             f.write(render_template('nfts.html', entries=nft_entries_sorted))
 
-        # 4. Git commit and push
-        commit_message = f"Add page: {title}"
-#        try:
-#            start_ssh_agent()
-#            subprocess.run(['ssh-add', RSA_LOCATION], check=True)
-#            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'add', '.'], check=True)
-#            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'commit', '-m', commit_message], check=True)
-#            subprocess.run(['git', '-C', GITHUB_REPO_DIR, 'push'], check=True)
-#        except Exception as e:
-#            flash(f"Git push failed: {e}")
-#            return render_template('error.html', error_message="Git push failed.")
-
+        # Done
         return render_template('success.html', tx_hash=tx_hash, gas_fee_eth=gas_fee_eth, receipt=receipt, token_id=token_id, cpub_tx_hash=cpub_tx_hash)
+
     return render_template('editor.html')
+
 
 @app.route('/logout')
 def logout():

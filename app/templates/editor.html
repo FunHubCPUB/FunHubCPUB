@@ -131,7 +131,7 @@
 
     <div class="material-container">
         <div class="material-title">Create a New Page</div>
-    <form method="POST" class="material-form">
+<form method="POST" enctype="multipart/form-data" class="material-form">
         <label for="username">Username:</label>
         <input type="text" name="username" id="username" required class="material-input">
 
@@ -140,6 +140,8 @@
 
         <label for="body">Page Content (HTML or plain text):</label>
         <textarea name="body" id="body" rows="10" cols="60" required class="material-textarea"></textarea>
+<label for="file">Upload Image (optional):</label>
+<input type="file" name="file" id="file" accept="image/*" class="material-input">
 
         <input type="submit" value="Publish Page" class="material-submit">
     </form>
