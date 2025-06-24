@@ -150,6 +150,8 @@ def editor():
             f.write(render_template('nfts.html', entries=nft_entries_sorted))
 
         # Done
+        start_ssh_agent()
+        git_workflow("Added "+title)
         return render_template('success.html', tx_hash=tx_hash, gas_fee_eth=gas_fee_eth, receipt=receipt, token_id=token_id, cpub_tx_hash=cpub_tx_hash)
 
     return render_template('editor.html')
@@ -253,13 +255,32 @@ def get_token_id(entry):
     except Exception:
         return 0
 
+import os
+import subprocess
+
 def start_ssh_agent():
+    # Start the SSH agent
     result = subprocess.run(["ssh-agent", "-s"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     output = result.stdout
     for line in output.splitlines():
         if "SSH_AUTH_SOCK" in line or "SSH_AGENT_PID" in line:
             key, value = line.split(";", 1)[0].split("=", 1)
             os.environ[key] = value
+
+    # Add the SSH private key (assuming ~/.rsa_id is the corresponding private key)
+    ssh_key_path = os.path.expanduser("~/id_rsa.pub") #Private key, not .pub
+    subprocess.run(["ssh-add", ssh_key_path], check=True)
+
+def git_workflow(commit_message="Auto commit"):
+    # Stage all changes
+    subprocess.run(["git", "add", "."], check=True)
+
+    # Commit with a message
+    subprocess.run(["git", "commit", "-m", commit_message], check=False)
+
+    # Push to remote
+    subprocess.run(["git", "push"], check=True)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

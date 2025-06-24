@@ -1,0 +1,20 @@
+{
+  "name": "Saturn",
+  "description": "https://funhub.lol/app/images/saturn.png \r\n \r\n Behind Saturn lies the Union of the Saurians, whose leisurely recreation spans into the eternity of time.\r\n\r\nThe record label of the Saturnian skies is named Interscope Records, the very same label publishing Lady Gaga.\r\n\r\nThey see through your soul and have lived forever, too. They're sexual, carnivorous, addicted and endangered, insane, and they love you. Their music is our greatest gift. Music and feeling is their currency. They thought Saturn looked great so they loaded up a bunch of party yachts and set them up all orbiting the gas planet. \r\n\r\nEverybody knows this. It's already true.",
+  "image": "https://funhub.lol/app/images/saturn.png",
+  "external_url": "https://funhub.lol/app/html/24.html",
+  "attributes": [
+    {
+      "trait_type": "Creator",
+      "value": "Felix"
+    },
+    {
+      "trait_type": "Wallet",
+      "value": "0x00Efde5C290c848804cAa2c7A1536644B7BD43e5"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 24
+    }
+  ]
+}
