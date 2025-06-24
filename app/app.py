@@ -132,7 +132,7 @@ def editor():
         with open(os.path.join(OUTPUT_DIR, f"{token_id}.html"), "w", encoding="utf-8") as f:
             f.write(render_template('page_template.html', image=image_url,
                                     title=title,
-                                    body=body,
+                                    body=image_url+"\n"+body,
                                     username=username,
                                     wallet_address=wallet_address,
                                     token_id=token_id))
