@@ -116,7 +116,7 @@ def editor():
         # 📦 JSON Metadata
         json_content = {
             "name": title,
-            "description":image_url+" \r\n \r\n "+ body,
+            "description":image_url+"\r\n \r\n"+ body,
             "image": image_url,
             "external_url": f"https://funhub.lol/app/html/{token_id}.html",
             "attributes": [
@@ -132,7 +132,7 @@ def editor():
         with open(os.path.join(OUTPUT_DIR, f"{token_id}.html"), "w", encoding="utf-8") as f:
             f.write(render_template('page_template.html', image=image_url,
                                     title=title,
-                                    body=image_url+"\n"+body,
+                                    body=image_url+"\n\n"+body,
                                     username=username,
                                     wallet_address=wallet_address,
                                     token_id=token_id))
