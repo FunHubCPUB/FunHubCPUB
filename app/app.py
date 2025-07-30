@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 from werkzeug.utils import secure_filename
 import urllib.parse
+from flask import jsonify
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -224,6 +225,47 @@ def mint_and_return_receipt(title, description):
         print(f"Error minting NFT or CPUB token: {e}")
         traceback.print_exc()
         return None, None, None, None, None
+@app.route('/mint', methods=['POST'])
+def mint_cpub():
+    try:
+        # Extract wallet address from form input
+        wallet_address = request.form.get('cpub_wallet', '').strip()
+        if not Web3.is_address(wallet_address):
+            raise ValueError("Invalid or missing wallet address.")
+
+        # Get account from private key
+        account = w3.eth.account.from_key(PRIVATE_KEY)
+        nonce = w3.eth.get_transaction_count(account.address)
+
+        # Build transaction to mint 1 CPUB token
+        cpub_txn = cpub_contract.functions.mintTo(wallet_address, 1).build_transaction({
+            'from': account.address,
+            'nonce': nonce,
+            'gas': 800000,
+            'gasPrice': w3.eth.gas_price
+        })
+
+        # Sign and send transaction
+        signed_cpub_txn = w3.eth.account.sign_transaction(cpub_txn, private_key=PRIVATE_KEY)
+        tx_hash = w3.eth.send_raw_transaction(signed_cpub_txn.raw_transaction)
+
+        # Get receipt
+        receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+
+        # Optional: Calculate gas fee in ETH
+        gas_fee_eth = Web3.from_wei(receipt.gasUsed * w3.eth.gas_price, 'ether')
+        return jsonify({
+            'tx_hash': receipt.transactionHash.hex(),
+            'gas_fee_eth': str(gas_fee_eth),
+            'token_id': 'N/A',  # Update if your contract emits token ID
+            'status': 'Success'
+        })
+
+    except Exception as e:
+        print(f"Error during CPUB minting: {e}")
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
 
 def get_html_file_names(directory):
     """

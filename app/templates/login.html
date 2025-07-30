@@ -127,7 +127,14 @@
           {% endif %}
         {% endwith %}
         </div>
+          <h2>Mint Your CPUB Token</h2>
+    <form id="mintForm" action="/mint" method="POST">
+        <label for="cpub_wallet">Wallet Address:</label><br>
+        <input type="text" id="cpub_wallet" name="cpub_wallet" required><br><br>
+        <button type="submit">Mint CPUB</button>
+    </form>
     </div>
+
     <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>
