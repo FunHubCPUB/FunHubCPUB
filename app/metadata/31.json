@@ -1,0 +1,20 @@
+{
+  "name": "10000000031",
+  "description": "https://funhub.lol/app/images/1000000031.png\r\n \r\n0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77",
+  "image": "https://funhub.lol/app/images/1000000031.png",
+  "external_url": "https://funhub.lol/app/html/31.html",
+  "attributes": [
+    {
+      "trait_type": "Creator",
+      "value": "Caesar Naples"
+    },
+    {
+      "trait_type": "Wallet",
+      "value": "0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 31
+    }
+  ]
+}
