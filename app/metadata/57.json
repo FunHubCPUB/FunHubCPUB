@@ -1,0 +1,26 @@
+{
+  "id": 57,
+  "name": "",
+  "description": "https://funhub.lol/app/html/57.html",
+  "image": "https://funhub.lol/app/images/default.jpg",
+  "external_url": "https://funhub.lol/app/html/57.html",
+  "attributes": [
+    {
+      "trait_type": "Creator",
+      "value": "Caesar Naples"
+    },
+    {
+      "trait_type": "Wallet",
+      "value": "0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": "0xe992544D724790069e53148e42Fdfc99b907DcD2"
+    },
+    {
+      "trait_type": "celo",
+      "value": 100
+    }
+  ],
+  "cpub_score": 100
+}
