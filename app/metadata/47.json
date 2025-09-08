@@ -1,0 +1,26 @@
+{
+  "id": 47,
+  "name": "",
+  "description": "https://funhub.lol/app/images/default.jpg\r\n \r\n",
+  "image": "https://funhub.lol/app/images/default.jpg",
+  "external_url": "https://funhub.lol/app/html/47.html",
+  "attributes": [
+    {
+      "trait_type": "Creator",
+      "value": "Symbols"
+    },
+    {
+      "trait_type": "Wallet",
+      "value": "0xff3a04f9eb0d92a557010182cf25e8e2a4ebff77"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": "0xAB9E6F0355621600A6d90Fb6f48AC5434619e56a"
+    },
+    {
+      "trait_type": "celo",
+      "value": 1
+    }
+  ],
+  "cpub_score": 1
+}

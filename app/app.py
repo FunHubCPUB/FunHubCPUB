@@ -172,16 +172,30 @@ def mint():
         nft_entries_sorted = sorted(nft_entries, key=get_token_id, reverse=True)
         with open(os.path.join(current_dir, 'nfts.html'), "w", encoding="utf-8") as f:
             f.write(render_template('nfts.html', entries=nft_entries_sorted))
-
-        # Start SSH agent and add key before git workflow
-        start_ssh_agent()
-        git_workflow("repo")
+        
+        git_push_with_ssh(title)
         # --- End file operations and git workflow ---
 
         flash(f"Minting successful! TX Hash: {tx_hash}, CPUB TX Hash: {cpub_tx_hash}")
         return redirect("https://funhub.lol/app/nfts.html")
 
     return render_template('mint.html')
+
+def git_push_with_ssh(commit_message="Auto commit"):
+    # Start SSH agent and add key
+    result = subprocess.run(["ssh-agent", "-s"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    output = result.stdout
+    for line in output.splitlines():
+        if "SSH_AUTH_SOCK" in line or "SSH_AGENT_PID" in line:
+            key, value = line.split(";", 1)[0].split("=", 1)
+            os.environ[key] = value
+    ssh_key_path = os.path.expanduser("~/id_rsa.pub")  # This should be id_rsa, not id_rsa.pub
+    subprocess.run(["ssh-add", ssh_key_path], check=True)
+
+    # Git add, commit, push
+    subprocess.run(["git", "add", "."], check=True)
+    subprocess.run(["git", "commit", "-m", commit_message], check=False)
+    subprocess.run(["git", "push"], check=True)
 
 
 @app.route('/policy')
