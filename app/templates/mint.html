@@ -1,34 +1,34 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mint CPUB Portal</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #e0f7fa;
+      background: radial-gradient(circle at top left, #0f0c29, #302b63, #24243e);
+      color: #fff;
       font-family: 'Segoe UI', sans-serif;
     }
 
     #formNebulaCore {
-      max-width: 480px;
-      margin: 3rem auto;
+      max-width: 440px;
+      margin: 2rem auto;
       padding: 2rem;
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(14px);
-      border-radius: 20px;
-      box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
-      border: 1px solid rgba(0, 255, 255, 0.1);
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.3);
     }
 
     .inputNebula {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid #00c9a7;
-      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid #555;
+      border-radius: 10px;
       padding: 0.75rem;
-      color: #e0f7fa;
+      color: #fff;
     }
 
     .mintBlastBtn {
@@ -36,112 +36,65 @@
       margin-bottom: 0.75rem;
       padding: 0.75rem;
       font-weight: bold;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #00c9a7, #845ec2);
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ff6ec4, #7873f5);
       border: none;
       color: white;
-      box-shadow: 0 0 12px rgba(132, 94, 194, 0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease;
     }
 
     .mintBlastBtn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(132, 94, 194, 0.6);
     }
 
     .labelCosmos {
       font-size: 0.9rem;
       margin-bottom: 0.25rem;
       font-weight: 500;
-      color: #b2ebf2;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
 
   <div id="formNebulaCore" class="container text-start">
-    <h2 class="text-center mb-4">🛸 Mint CPUB Artifact</h2>
+    <h2 class="text-center mb-4">🚀 Mint CPUB Artifact</h2>
 
-    <form id="cpubMintForm" enctype="multipart/form-data">
+    <form id="cpubMintForm" enctype="multipart/form-data" method="POST" action="{{ url_for('mint') }}">
       <div class="mb-3">
         <label for="evmWarpGate" class="labelCosmos">Wallet Address (EVM compatible)</label>
-        <input type="text" id="evmWarpGate" class="form-control inputNebula" placeholder="0xYourWalletHere" />
+        <input type="text" name="wallet_address" id="evmWarpGate" class="form-control inputNebula" placeholder="0xYourWalletHere" required pattern="^0x[a-fA-F0-9]{40}$">
       </div>
 
       <div class="mb-3">
         <label for="userAliasQuantum" class="labelCosmos">Username</label>
-        <input type="text" class="form-control inputNebula" id="userAliasQuantum" placeholder="Your cosmic handle" />
+        <input type="text" name="username" class="form-control inputNebula" id="userAliasQuantum" placeholder="Your cosmic handle" required>
       </div>
 
       <div class="mb-3">
         <label for="artifactLore" class="labelCosmos">Body Text</label>
-        <textarea class="form-control inputNebula" id="artifactLore" rows="4" placeholder="Describe your CPUB artifact..."></textarea>
+        <textarea class="form-control inputNebula" name="description" id="artifactLore" rows="4" placeholder="Describe your CPUB artifact..." required></textarea>
       </div>
 
       <div class="mb-3">
         <label for="stellarUpload" class="labelCosmos">Upload Image</label>
-        <input class="form-control inputNebula" type="file" id="stellarUpload" accept="image/*" />
+        <input class="form-control inputNebula" type="file" name="image" id="stellarUpload" accept="image/*">
+      </div>
+
+      <div class="mb-3">
+        <label for="cpub_amount" class="labelCosmos">CPUB Amount</label>
+        <select name="cpub_amount" id="cpub_amount" class="form-select inputNebula" required>
+          <option value="1">1 CPUB</option>
+          <option value="10">10 CPUB</option>
+          <option value="100">100 CPUB</option>
+        </select>
       </div>
 
       <div class="d-grid gap-2">
-        <button type="button" class="mintBlastBtn" data-amount="1">Mint 1 CPUB</button>
-        <button type="button" class="mintBlastBtn" data-amount="10">Mint 10 CPUB</button>
-        <button type="button" class="mintBlastBtn" data-amount="100">Mint 100 CPUB</button>
+        <button type="submit" class="mintBlastBtn">Mint</button>
       </div>
     </form>
   </div>
 
-  <script>
-    document.querySelectorAll('.mintBlastBtn').forEach(btn => {
-      btn.addEventListener('click', async function () {
-        const amount = parseInt(this.getAttribute('data-amount'));
-
-        let walletInput = document.getElementById('evmWarpGate').value.trim().toLowerCase();
-        const evmRegex = /^0x[a-fA-F0-9]{40}$/;
-        const wallet = evmRegex.test(walletInput) ? walletInput : "0x0000000000000000000000000000000000000000";        const username = document.getElementById('userAliasQuantum').value.trim() || "";
-        const bodyText = document.getElementById('artifactLore').value.trim() || "";
-        const imageFile = document.getElementById('stellarUpload').files[0] || null;
-
-        const hasFormData = wallet || username || bodyText || imageFile;
-
-        try {
-          if (hasFormData) {
-            const formData = new FormData();
-            formData.append('wallet_address', wallet);
-            formData.append('username', username);
-            formData.append('body', bodyText);
-            if (imageFile) formData.append('file', imageFile);
-
-            const editorResponse = await fetch('/mint', {
-              method: 'POST',
-              body: formData
-            });
-
-            if (!editorResponse.ok) {
-              const error = await editorResponse.text();
-              alert("NFT metadata submission failed: " + error);
-              return;
-            }
-          }
-
-          const mintResponse = await fetch('/mintcpub', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ wallet_address: wallet, amount: amount })
-          });
-
-          const result = await mintResponse.json();
-          if (mintResponse.ok) {
-            alert(`✅ Minted ${amount} CPUB\nTx Hash: ${result.tx_hash}`);
-          } else {
-            alert("CPUB minting failed: " + result.error);
-          }
-        } catch (err) {
-          console.error("Minting error:", err);
-          alert("Unexpected error occurred during minting.");
-        }
-      });
-    });
-  </script>
 </body>
 </html>
