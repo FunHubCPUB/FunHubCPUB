@@ -1,0 +1,26 @@
+{
+  "Celo": {
+    "score": 230,
+    "nfts": ["nft_001", "nft_007", "nft_014"]
+  },
+  "EVM": {
+    "score": 180,
+    "nfts": ["nft_001", "nft_009"]
+  },
+  "Lore": {
+    "score": 310,
+    "nfts": ["nft_002", "nft_007", "nft_010", "nft_014"]
+  },
+  "Synthwave": {
+    "score": 150,
+    "nfts": ["nft_003", "nft_008"]
+  },
+  "Mintable": {
+    "score": 270,
+    "nfts": ["nft_001", "nft_002", "nft_003", "nft_014"]
+  },
+  "Protoss": {
+    "score": 100,
+    "nfts": ["nft_014"]
+  }
+}
