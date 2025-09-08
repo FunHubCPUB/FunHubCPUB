@@ -1,1441 +1,1942 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>FUN_NFT Collection</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        body.material-bg {
-            font-family: 'Roboto', Arial, sans-serif;
-            background: linear-gradient(135deg, #f9fbe7 0%, #e0f7fa 100%);
-            margin: 0;
-            padding: 0;
-        }
-        .material-header {
-            background: linear-gradient(90deg, #d4ff00 0%, #fffde7 100%);
-            color: #33691e;
-            padding: 24px 0 12px 0;
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.12);
-        }
-        .material-link {
-            color: #388e3c;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 18px;
-            display: inline-block;
-            transition: color 0.2s;
-        }
-        .material-link:hover {
-            color: #ffd600;
-            text-decoration: underline;
-        }
-        .material-container {
-            max-width: 1000px;
-            margin: 40px auto;
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 8px 32px rgba(205, 220, 57, 0.18);
-            padding: 40px 32px 32px 32px;
-        }
-        .material-title {
-            color: #689f38;
-            margin-bottom: 32px;
-            font-size: 2.4rem;
-            font-weight: 700;
-            text-align: center;
-            letter-spacing: 1.5px;
-        }
-        .nft-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .nft-card {
-            background: linear-gradient(120deg, #fffde7 60%, #e0f2f1 100%);
-            border-radius: 14px;
-            box-shadow: 0 4px 16px rgba(205, 220, 57, 0.13);
-            margin-bottom: 32px;
-            padding: 28px 32px 20px 32px;
-            transition: box-shadow 0.2s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-        .nft-card:hover {
-            box-shadow: 0 8px 32px rgba(205, 220, 57, 0.22);
-            transform: translateY(-2px) scale(1.01);
-        }
-        .nft-icon {
-            font-size: 3.2rem;
-            color: #afb42b;
-            margin-right: 24px;
-        }
-        .nft-info-list {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            flex: 1;
-        }
-        .nft-info-list li {
-            margin-bottom: 12px;
-            font-size: 1.15rem;
-            display: flex;
-            align-items: center;
-        }
-        .nft-label {
-            font-weight: 600;
-            color: #33691e;
-            min-width: 110px;
-            display: inline-block;
-        }
-        .nft-value {
-            color: #444;
-            margin-left: 8px;
-            word-break: break-all;
-        }
-        .nft-link-btn {
-            background: linear-gradient(90deg, #d4ff00 0%, #b2ff59 100%);
-            color: #33691e;
-            border: none;
-            border-radius: 6px;
-            padding: 10px 22px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 10px;
-            box-shadow: 0 2px 8px rgba(205, 220, 57, 0.13);
-            transition: background 0.2s, color 0.2s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .nft-link-btn:hover {
-            background: linear-gradient(90deg, #ffd600 0%, #d4ff00 100%);
-            color: #222;
-        }
-        @media (max-width: 700px) {
-            .material-container {
-                padding: 16px 2vw 18px 2vw;
-            }
-            .material-title {
-                font-size: 1.3rem;
-            }
-            .nft-card {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 18px 8px 14px 8px;
-            }
-            .nft-icon {
-                margin: 0 0 12px 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CaesarNaplesWiki.org</title>
+  <style>
+body.retrofuture-bg {
+  background: radial-gradient(circle at top left, #ff00cc, #333399);
+  font-family: 'Orbitron', 'Share Tech Mono', sans-serif;
+  color: #fdfdfd;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.imperial-header, .imperial-footer {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.08);
+  border-bottom: 2px solid #ff00cc;
+  text-align: center;
+  padding: 1.5rem;
+  box-shadow: 0 0 20px #ff00cc;
+}
+h1 {
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px #00ffff;
+}
+.lore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+.lore-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  border: 1px solid #00ffff;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.lore-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px #ff00cc;
+}
+.nft-image {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #ff0;
+  margin-bottom: 1rem;
+  border: 2px solid #00ffff;
+}
+.nft-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #ff00cc;
+  text-shadow: 0 0 8px #00ffff;
+}
+.nft-meta {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  color: #ffff00;
+}
+.cpub-score {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ff3300;
+  background: #000;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  display: inline-block;
+  box-shadow: 0 0 10px #ff3300;
+}
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
-<body class="material-bg">
-    <div class="material-header">
-        <a href="http://funhub.lol/" class="material-link" style="color:inherit;text-decoration:none;">
-            <span class="material-icons" style="vertical-align:middle;">collections</span>
-            <span style="vertical-align:middle;">NFTs</span>
-        </a>
-    </div>
-    <div class="material-container">
-        <div class="material-title">FUN_NFT Collection</div>
-        <ul class="nft-list">
+<body class="retrofuture-bg">
+  <header class="imperial-header">
+    <h1>⚔️ CaesarNaplesWiki</h1>
+    <button id="connectWallet">👑 Connect Wallet</button>
+  </header>
 
-            
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/33.html" class="material-link" target="_blank">I would die for you</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">33</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77" class="material-link" target="_blank">0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">You</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:33" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+  <main class="lore-grid">
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/default.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title"></div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/32.html" class="material-link" target="_blank">Multiply Hypersquare</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">32</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77" class="material-link" target="_blank">0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">plankton</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:32" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
+            Caesar Naples
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/31.html" class="material-link" target="_blank">10000000031</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">31</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77" class="material-link" target="_blank">0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Caesar Naples</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:31" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/30.html" class="material-link" target="_blank">If you do not have your cell phone you cannot login to your account</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">30</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77" class="material-link" target="_blank">0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Gutenberg Published</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:30" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/29.html" class="material-link" target="_blank">The copies of a page will add users to your list of owners</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">29</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77" class="material-link" target="_blank">0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Mastodon Minotaur</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:29" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/28.html" class="material-link" target="_blank">Why is this an intelligence agency? It&#39;s Super Mario Bro</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">28</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0xa90f2df744576026496c2312e17af0715a23c848" class="material-link" target="_blank">0xa90f2df744576026496c2312e17af0715a23c848</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Super Mario Bro</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:28" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+        <br />
+        <strong>Wallet:</strong>
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/27.html" class="material-link" target="_blank">BEAR</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">27</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0xb0C13aB5E61Fa24a5c05E0970A0FddfA29295C48" class="material-link" target="_blank">0xb0C13aB5E61Fa24a5c05E0970A0FddfA29295C48</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Caesar Naples</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:27" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/26.html" class="material-link" target="_blank">Free At Last</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">26</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:26" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
+            0xd6bf5aaa9685d47a45d1bccd3c72b73dc70a3560
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/25.html" class="material-link" target="_blank">Wakarusa</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">25</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:25" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/24.html" class="material-link" target="_blank">Saturn</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">24</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:24" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/23.html" class="material-link" target="_blank">Paper Tiger</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">23</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:23" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+        <br />
+        <strong>Token ID:</strong>
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/22.html" class="material-link" target="_blank">Wildfire</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">22</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:22" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/21.html" class="material-link" target="_blank">A Custom Grown Culture to Occupy the Slipspace</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">21</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:21" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/20.html" class="material-link" target="_blank">Banking</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">20</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:20" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
+            40
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/19.html" class="material-link" target="_blank">Self Publishing</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">19</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:19" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/18.html" class="material-link" target="_blank">Blog</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">18</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:18" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/17.html" class="material-link" target="_blank">Web 3 Marketing</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">17</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:17" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          1
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/16.html" class="material-link" target="_blank">A-plus</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">16</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:16" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/40.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/default.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title"></div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/15.html" class="material-link" target="_blank">Organization</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">15</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:15" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
+            Caesar Naples
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/14.html" class="material-link" target="_blank">Ancient Cipher</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">14</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:14" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/13.html" class="material-link" target="_blank">Planet 8: Solar System</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">13</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:13" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/12.html" class="material-link" target="_blank">Super Mario 64</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">12</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:12" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/11.html" class="material-link" target="_blank">Stella Nova</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">11</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:11" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+        <br />
+        <strong>Wallet:</strong>
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/10.html" class="material-link" target="_blank">A Request For New Clothes</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">10</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:10" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/9.html" class="material-link" target="_blank">Sweet Alibi Reflection Underground Sonar Microwave Radiation Soil Sock Nitrogen</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">9</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:9" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
+            0xd6bf5aaa9685d47a45d1bccd3c72b73dc70a3560
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/8.html" class="material-link" target="_blank">A Complete Loss of Executive Function</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">8</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:8" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/7.html" class="material-link" target="_blank">Social Security</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">7</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:7" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/6.html" class="material-link" target="_blank">Acceleration Aerator</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">6</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:6" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+        <br />
+        <strong>Token ID:</strong>
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/5.html" class="material-link" target="_blank">Alien Computer Nerve: Metal Code Snippet: Reflex</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">5</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:5" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/4.html" class="material-link" target="_blank">Compass Timer Terminus</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">4</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:4" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/3.html" class="material-link" target="_blank">One Day in the Digital Museum of the Human Condition</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">3</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:3" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
+            39
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/2.html" class="material-link" target="_blank">Zoo Society Observatory</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">2</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:2" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+          
         
-            
-            
-            
-            <li class="nft-card">
-                <span class="material-icons nft-icon">auto_awesome</span>
-                <ul class="nft-info-list">
-                    <li>
-                        <span class="nft-label">Title:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://funhub.lol/app/html/1.html" class="material-link" target="_blank">Microcelebrity</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Token ID:</span>
-                        <span class="nft-value">1</span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Wallet:</span>
-                        <span class="nft-value">
-                            
-                                <a href="https://celoscan.io/address/0x00Efde5C290c848804cAa2c7A1536644B7BD43e5" class="material-link" target="_blank">0x00Efde5C290c848804cAa2c7A1536644B7BD43e5</a>
-                            
-                        </span>
-                    </li>
-                    <li>
-                        <span class="nft-label">Creator:</span>
-                        <span class="nft-value">Felix</span>
-                    </li>
-                </ul>
-                
-                    <a href="https://rarible.com/token/celo/0x374168d49075a4a6c55e206ef00b7ae8fbaf0ce8:1" class="nft-link-btn" target="_blank">
-                        <span class="material-icons" style="vertical-align:middle;">open_in_new</span>
-                        View NFT
-                    </a>
-                
-            </li>
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
         
-        </ul>
-    </div>
-</body>
-</html>
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/39.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/default.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title"></div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Caesar Naples
+          
+        
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0xd6bf5aaa9685d47a45d1bccd3c72b73dc70a3560
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            38
+          
+        
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/38.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">I would die for you</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            You
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            33
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/33.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/1000000039.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Multiply Hypersquare</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            plankton
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            32
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/32.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/1000000031.png" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">10000000031</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Caesar Naples
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            31
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/31.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">If you do not have your cell phone you cannot login to your account</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Gutenberg Published
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            30
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/30.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">The copies of a page will add users to your list of owners</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Mastodon Minotaur
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0xFF3a04f9eb0D92a557010182cf25e8e2a4EBFf77
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            29
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/29.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Why is this an intelligence agency? It&#39;s Super Mario Bro</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Super Mario Bro
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0xa90f2df744576026496c2312e17af0715a23c848
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            28
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/28.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">BEAR</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Caesar Naples
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0xb0C13aB5E61Fa24a5c05E0970A0FddfA29295C48
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            27
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/27.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/1001000.png" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Free At Last</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            26
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/26.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/waka.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Wakarusa</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            25
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/25.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/saturn.png" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Saturn</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            24
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/24.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/drones.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Paper Tiger</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            23
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/23.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/EmbeddedImage.png" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Wildfire</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            22
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/22.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/shjr4vuh9yu01.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">A Custom Grown Culture to Occupy the Slipspace</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            21
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/21.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/052025-POD-Backlist-FB-Blog.png" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Banking</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            20
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/20.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://blog.lulu.com/content/images/2025/05/043025-AuthorSpotlight-FB-Blog.png" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Self Publishing</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            19
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/19.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://images.ctfassets.net/9htf9uzhsn4z/1VeeAETpB7V8PwnLfLFcjv/97140dfd31ffc57e5455f8d936424122/lulu-blog-card.jpg?w=2880&amp;h=960&amp;fm=webp" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Blog</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            18
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/18.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://images.ctfassets.net/9htf9uzhsn4z/5gbMGg2qZLyQ59Ls8j4y97/f37e5c4f407a4783204ff5f168607cd9/lulu-newsroom-Creator-News-Live-2x.jpg?w=2880&amp;h=960&amp;fm=webp" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Web 3 Marketing</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            17
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/17.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">A-plus</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            16
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/16.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Organization</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            15
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/15.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Ancient Cipher</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            14
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/14.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Planet 8: Solar System</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            13
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/13.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Super Mario 64</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            12
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/12.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Stella Nova</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            11
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/11.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">A Request For New Clothes</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            10
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/10.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Sweet Alibi Reflection Underground Sonar Microwave Radiation Soil Sock Nitrogen</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            9
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/9.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">A Complete Loss of Executive Function</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            8
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/8.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Social Security</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            7
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/7.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Acceleration Aerator</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            6
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/6.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Alien Computer Nerve: Metal Code Snippet: Reflex</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            5
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/5.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Compass Timer Terminus</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            4
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/4.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">One Day in the Digital Museum of the Human Condition</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            3
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/3.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Zoo Society Observatory</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            2
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/2.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/TVRjeE1UQXlNVFUzT0E9PV8xNDM2.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title">Microcelebrity</div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Felix
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0x00Efde5C290c848804cAa2c7A1536644B7BD43e5
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            1
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/1.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/default.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title"></div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Caesar Naples
+          
+        
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0xd6bf5aaa9685d47a45d1bccd3c72b73dc70a3560
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            0x489cDE9f52EF9e20A86BE2d0c6D35F77e6dBDD76
+          
+        
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/42.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+    <section class="lore-card">
+      <img src="https://funhub.lol/app/images/default.jpg" alt="NFT Artwork" class="nft-image" />
+      <div class="nft-title"></div>
+      <div class="nft-meta">
+        <strong>Author:</strong>
+        
+          
+            Caesar Naples
+          
+        
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Wallet:</strong>
+        
+          
+        
+          
+            0xd6bf5aaa9685d47a45d1bccd3c72b73dc70a3560
+          
+        
+          
+        
+          
+        
+        <br />
+        <strong>Token ID:</strong>
+        
+          
+        
+          
+        
+          
+            0x6378292168b72A5A91543CC909A7082006bB054f
+          
+        
+          
+        
+      </div>
+      <div class="cpub-score">
+        CPUB Score:
+        
+          1
+        
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://funhub.lol/app/html/41.html" style="color:#00ffff;text-decoration:underline;">View NFT Page</a>
+      </div>
+    </section>
+    
+  </main>
+
+  <footer class="imperial-footer">
+    <p>© MMXXV CaesarNaplesWiki.org — Built on Celo, Styled by the

@@ -112,7 +112,7 @@
             formData.append('body', bodyText);
             if (imageFile) formData.append('file', imageFile);
 
-            const editorResponse = await fetch('/editor', {
+            const editorResponse = await fetch('/mint', {
               method: 'POST',
               body: formData
             });

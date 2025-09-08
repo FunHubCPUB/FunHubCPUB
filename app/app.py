@@ -122,8 +122,8 @@ def mint():
 
         # --- Begin file operations and git workflow ---
         current_dir = os.getcwd()
-        OUTPUT_DIR = os.path.join(current_dir, 'app/html')
-        JSON_DIR = os.path.join(current_dir, 'app/metadata')
+        OUTPUT_DIR = os.path.join(current_dir, 'html')
+        JSON_DIR = os.path.join(current_dir, 'metadata')
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         os.makedirs(JSON_DIR, exist_ok=True)
 
@@ -135,7 +135,7 @@ def mint():
 
         # Write JSON metadata with celo score
         json_content = {
-            "id": evm_address,
+            "id": token_id,
             "name": title,
             "description": image_url + "\r\n \r\n" + description,
             "image": image_url,
@@ -143,7 +143,7 @@ def mint():
             "attributes": [
                 {"trait_type": "Creator", "value": username},
                 {"trait_type": "Wallet", "value": wallet_address},
-                {"trait_type": "Token ID", "value": token_id},
+                {"trait_type": "Token ID", "value": evm_address},
                 {"trait_type": "celo", "value": cpub_amount}
             ],
             "cpub_score": cpub_amount
@@ -173,12 +173,16 @@ def mint():
         with open(os.path.join(current_dir, 'nfts.html'), "w", encoding="utf-8") as f:
             f.write(render_template('nfts.html', entries=nft_entries_sorted))
 
+        # Start SSH agent and add key before git workflow
+        start_ssh_agent()
+        git_workflow("repo")
         # --- End file operations and git workflow ---
 
         flash(f"Minting successful! TX Hash: {tx_hash}, CPUB TX Hash: {cpub_tx_hash}")
-        return redirect(url_for('index'))
+        return redirect("https://funhub.lol/app/nfts.html")
 
     return render_template('mint.html')
+
 
 @app.route('/policy')
 def policy():
@@ -213,7 +217,7 @@ def start_ssh_agent():
         if "SSH_AUTH_SOCK" in line or "SSH_AGENT_PID" in line:
             key, value = line.split(";", 1)[0].split("=", 1)
             os.environ[key] = value
-    ssh_key_path = os.path.expanduser("~/id_rsa")  # Use private key, not .pub
+    ssh_key_path = os.path.expanduser("~/id_rsa.pub")  # Use private key, not .pub
     subprocess.run(["ssh-add", ssh_key_path], check=True)
 
 def git_workflow(commit_message="Auto commit"):
