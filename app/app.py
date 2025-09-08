@@ -133,11 +133,11 @@ def mint():
         # Generate EVM address for metadata
         evm_address = generate_evm_address()
 
-        # Write JSON metadata with celo score
+        # Write JSON metadata with description as the link to the token's HTML page
         json_content = {
             "id": token_id,
             "name": title,
-            "description": image_url + "\r\n \r\n" + description,
+            "description": f"https://funhub.lol/app/html/{token_id}.html",
             "image": image_url,
             "external_url": f"https://funhub.lol/app/html/{token_id}.html",
             "attributes": [
@@ -151,7 +151,7 @@ def mint():
         with open(os.path.join(JSON_DIR, f"{token_id}.json"), "w", encoding="utf-8") as f:
             json.dump(json_content, f, indent=2)
 
-        # Write HTML page
+        # Write HTML page for the NFT
         with open(os.path.join(OUTPUT_DIR, f"{token_id}.html"), "w", encoding="utf-8") as f:
             f.write(render_template('nft.html', image=image_url,
                                     title=title,
@@ -161,7 +161,7 @@ def mint():
                                     token_id=token_id,
                                     cpub_score=cpub_amount))
 
-        # Update NFT index page
+        # Update NFT index page (nfts.html) with all NFTs
         nft_entries = []
         for entry in get_json_file_names(JSON_DIR):
             try:
@@ -170,14 +170,24 @@ def mint():
             except Exception as e:
                 print(f"Error loading {entry}: {e}")
         nft_entries_sorted = sorted(nft_entries, key=get_token_id, reverse=True)
+        # Write the nfts.html file to the OUTPUT_DIR so it is always updated
+        with open(os.path.join(OUTPUT_DIR, 'nfts.html'), "w", encoding="utf-8") as f:
+            f.write(render_template('nfts.html', entries=nft_entries_sorted))
+        # Optionally, also write to current_dir for legacy support
         with open(os.path.join(current_dir, 'nfts.html'), "w", encoding="utf-8") as f:
             f.write(render_template('nfts.html', entries=nft_entries_sorted))
-        
-        git_push_with_ssh(title)
+
+        subprocess.run(["/bin/bash", "github_workflow.sh"], check=True)
         # --- End file operations and git workflow ---
 
-        flash(f"Minting successful! TX Hash: {tx_hash}, CPUB TX Hash: {cpub_tx_hash}")
-        return redirect("https://funhub.lol/app/nfts.html")
+        return render_template(
+            'success.html',
+            tx_hash=tx_hash,
+            gas_fee_eth=gas_fee_eth,
+            receipt=receipt,
+            token_id=token_id,
+            cpub_tx_hash=cpub_tx_hash
+        )
 
     return render_template('mint.html')
 
