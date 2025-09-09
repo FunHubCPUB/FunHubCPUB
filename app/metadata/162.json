@@ -1,0 +1,26 @@
+{
+  "id": 162,
+  "name": "",
+  "description": "https://funhub.lol/app/html/162.html",
+  "image": "https://funhub.lol/app/images/default.jpg",
+  "external_url": "https://funhub.lol/app/html/162.html",
+  "attributes": [
+    {
+      "trait_type": "Creator",
+      "value": "Hims"
+    },
+    {
+      "trait_type": "Wallet",
+      "value": "0xe2806ED2c876ee425274cC1BF047117379015C25"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": "0x6B63eB03340bdf6077894E9b15D7C696545773A7"
+    },
+    {
+      "trait_type": "celo",
+      "value": 1
+    }
+  ],
+  "cpub_score": 1
+}
