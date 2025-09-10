@@ -1,53 +1,3 @@
-from flask import abort
-# Utility to get or create the NFT interaction dict
-def get_or_create_nft_dict(token_id):
-    dict_path = os.path.join(os.path.dirname(__file__), 'metadata', f'{token_id}.dict.json')
-    if not os.path.exists(dict_path):
-        # Default structure
-        default_dict = {"comments": [], "likes": 0, "shares": 0, "add": []}
-        with open(dict_path, 'w', encoding='utf-8') as f:
-            json.dump(default_dict, f, indent=2)
-        return default_dict
-    else:
-        with open(dict_path, 'r', encoding='utf-8') as f:
-            return json.load(f)
-
-# Utility to get NFT metadata
-def get_nft_metadata(token_id):
-    meta_path = os.path.join(os.path.dirname(__file__), 'metadata', f'{token_id}.json')
-    if not os.path.exists(meta_path):
-        return None
-    with open(meta_path, 'r', encoding='utf-8') as f:
-        return json.load(f)
-
-# Render nfts.html for a single NFT with its dict
-def render_nft_with_dict(token_id):
-    nft_meta = get_nft_metadata(token_id)
-    nft_dict = get_or_create_nft_dict(token_id)
-    if not nft_meta:
-        abort(404)
-    # nfts.html expects a list of entries, so wrap in a list
-    return render_template('nfts.html', entries=[nft_meta], nft_dict=nft_dict, token_id=token_id)
-
-# /add/<token_id>
-@app.route('/add/<token_id>', methods=['GET'])
-def add_nft(token_id):
-    return render_nft_with_dict(token_id)
-
-# /comment/<token_id>
-@app.route('/comment/<token_id>', methods=['GET'])
-def comment_nft(token_id):
-    return render_nft_with_dict(token_id)
-
-# /like/<token_id>
-@app.route('/like/<token_id>', methods=['GET'])
-def like_nft(token_id):
-    return render_nft_with_dict(token_id)
-
-# /share/<token_id>
-@app.route('/share/<token_id>', methods=['GET'])
-def share_nft(token_id):
-    return render_nft_with_dict(token_id)
 import uuid
 from flask import Flask, render_template, request, redirect, session, url_for, flash
 import os
@@ -58,6 +8,7 @@ from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 import urllib.parse
 import os
+from flask import abort
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
@@ -270,17 +221,74 @@ def policy():
     return render_template('policy.html')
 
 
+# Utility to get or create the NFT interaction dict
+def get_or_create_nft_dict(token_id):
+    dict_path = os.path.join(os.path.dirname(__file__), 'metadata', f'{token_id}.dict.json')
+    try:
+        if not os.path.exists(dict_path):
+            default_dict = {"comments": [], "likes": 0, "shares": 0, "add": []}
+            with open(dict_path, 'w', encoding='utf-8') as f:
+                json.dump(default_dict, f, indent=2)
+            return default_dict
+        else:
+            with open(dict_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+    except Exception as e:
+        print(f"Error in get_or_create_nft_dict({token_id}): {e}")
+        return {"comments": [], "likes": 0, "shares": 0, "add": []}
 
+# Utility to get NFT metadata
+def get_nft_metadata(token_id):
+    meta_path = os.path.join(os.path.dirname(__file__), 'metadata', f'{token_id}.json')
+    try:
+        if not os.path.exists(meta_path):
+            return None
+        with open(meta_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"Error in get_nft_metadata({token_id}): {e}")
+        return None
 
+# Render nfts.html for a single NFT with its dict
+def render_nft_with_dict(token_id):
+    try:
+        nft_meta = get_nft_metadata(token_id)
+        nft_dict = get_or_create_nft_dict(token_id)
+        if not nft_meta:
+            abort(404)
+        return render_template('nfts.html', entries=[nft_meta], nft_dict=nft_dict, token_id=token_id)
+    except Exception as e:
+        print(f"Error in render_nft_with_dict({token_id}): {e}")
+        abort(500)
 
+# /add/<token_id>
+@app.route('/add/<token_id>', methods=['GET'])
+def add_nft(token_id):
+    return render_nft_with_dict(token_id)
 
-import os
-import subprocess
+# /comment/<token_id>
+@app.route('/comment/<token_id>', methods=['GET'])
+def comment_nft(token_id):
+    return render_nft_with_dict(token_id)
+
+# /like/<token_id>
+@app.route('/like/<token_id>', methods=['GET'])
+def like_nft(token_id):
+    return render_nft_with_dict(token_id)
+
+# /share/<token_id>
+@app.route('/share/<token_id>', methods=['GET'])
+def share_nft(token_id):
+    return render_nft_with_dict(token_id)
 
 def get_json_file_names(directory):
-    if not os.path.exists(directory):
+    try:
+        if not os.path.exists(directory):
+            return []
+        return [file for file in os.listdir(directory) if file.endswith('.json')]
+    except Exception as e:
+        print(f"Error in get_json_file_names({directory}): {e}")
         return []
-    return [file for file in os.listdir(directory) if file.endswith('.json')]
 
 def get_token_id(entry):
     try:
@@ -288,7 +296,8 @@ def get_token_id(entry):
             if attr.get("trait_type") == "Token ID":
                 return int(attr.get("value", 0))
         return 0
-    except Exception:
+    except Exception as e:
+        print(f"Error in get_token_id: {e}")
         return 0
 
 def start_ssh_agent():
@@ -309,8 +318,12 @@ def git_workflow(commit_message="Auto commit"):
 from eth_account import Account
 
 def generate_evm_address():
-    acct = Account.create()
-    return acct.address
+    try:
+        acct = Account.create()
+        return acct.address
+    except Exception as e:
+        print(f"Error in generate_evm_address: {e}")
+        return "0x0"
 
 if __name__ == '__main__':
     app.run(debug=True)
