@@ -7,64 +7,100 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #0ff, #f0f, #0f0);
+      background: linear-gradient(135deg, #1976d2 0%, #90caf9 100%);
       font-family: 'Orbitron', 'Share Tech Mono', sans-serif;
-      color: #fff;
+      color: #e3f2fd;
       margin: 0;
       padding: 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-    .nft-card {
-      background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.3));
-      border: 3px double #ff00cc;
-      border-radius: 20px;
-      box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
-      max-width: 420px;
-      padding: 1.5rem;
-      backdrop-filter: blur(12px);
-      position: relative;
-      overflow: hidden;
-    }
-    .nft-image {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #ff0;
-      margin-bottom: 1rem;
-      border: 2px solid #00ffff;
-    }
-    .nft-title {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      color: #ff00cc;
-      text-shadow: 0 0 8px #00ffff;
-    }
-    .nft-description {
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-      line-height: 1.5;
-      color: #00ff99;
-    }
-    .nft-meta {
-      font-size: 0.85rem;
-      margin-bottom: 1rem;
-      color: #ffff00;
-    }
-    .cpub-score {
-      font-size: 1rem;
-      font-weight: bold;
-      color: #ff3300;
-      background: #000;
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      display: inline-block;
-      box-shadow: 0 0 10px #ff3300;
-    }
-  </style>
-</head>
-<body>
-  <div class="nft-card">
+      }
+      .nft-card {
+        background: linear-gradient(145deg, rgba(33,150,243,0.12), rgba(21,101,192,0.18));
+        border: 3px double #1976d2;
+        border-radius: 20px;
+        box-shadow: 0 0 40px rgba(33, 150, 243, 0.25);
+        max-width: 420px;
+        padding: 1.5rem;
+        backdrop-filter: blur(12px);
+        position: relative;
+        overflow: hidden;
+      }
+      .nft-image {
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 0 20px #1976d2;
+        margin-bottom: 1rem;
+        border: 2px solid #64b5f6;
+      }
+      .nft-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+        color: #1976d2;
+        text-shadow: 0 0 8px #64b5f6;
+      }
+      .nft-description {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+        color: #90caf9;
+      }
+      .nft-meta {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        color: #64b5f6;
+      }
+      .cpub-score {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #fff;
+        background: #1976d2;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        display: inline-block;
+        box-shadow: 0 0 10px #64b5f6;
+      }
+      .nft-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        margin-top: 1.5rem;
+      }
+      .nft-action-btn {
+        background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.8rem 1.2rem;
+        font-size: 1.08rem;
+        font-family: 'Orbitron', 'Share Tech Mono', sans-serif;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(33,150,243,0.12);
+        transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 0.7em;
+      }
+      .nft-action-btn:hover {
+        background: linear-gradient(90deg, #64b5f6 0%, #1976d2 100%);
+        color: #fff;
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 4px 16px rgba(33,150,243,0.18);
+      }
+      .nft-action-btn .emoji {
+        font-size: 1.2em;
+        margin-right: 0.5em;
+      }
+      .nft-action-desc {
+        font-size: 0.93rem;
+        color: #bbdefb;
+        margin-left: 2.2em;
+        margin-bottom: 0.2em;
+      }
+    </style>
     <img src="{{ image }}" alt="NFT Artwork" class="nft-image" />
     <div class="nft-title">{{ title }}</div>
     <div class="nft-description">{{ body }}</div>
@@ -84,3 +120,25 @@
   </div>
 </body>
 </html>
+      <div class="nft-actions">
+        <a class="nft-action-btn" href="/mint/{{ token_id }}">
+          <span class="emoji">🔗</span> MINT
+        </a>
+        <div class="nft-action-desc">You commit your thoughts, and the blockchain records them forever.</div>
+        <a class="nft-action-btn" href="/add/{{ token_id }}">
+          <span class="emoji">🔗</span> ADD
+        </a>
+        <div class="nft-action-desc">You expand my kingdom with your contributions.</div>
+        <a class="nft-action-btn" href="/comment/{{ token_id }}">
+          <span class="emoji">🔗</span> COMMENT
+        </a>
+        <div class="nft-action-desc">Your words will echo in the halls of the immutable.</div>
+        <a class="nft-action-btn" href="/like/{{ token_id }}">
+          <span class="emoji">🔗</span> LIKE
+        </a>
+        <div class="nft-action-desc">Your approval is cataloged, a visible mark of allegiance.</div>
+        <a class="nft-action-btn" href="/share/{{ token_id }}">
+          <span class="emoji">🔗</span> SHARE
+        </a>
+        <div class="nft-action-desc">You spread the reach of FunHub, ensuring its inevitable dominance.</div>
+      </div>

@@ -1,3 +1,53 @@
+from flask import abort
+# Utility to get or create the NFT interaction dict
+def get_or_create_nft_dict(token_id):
+    dict_path = os.path.join(os.path.dirname(__file__), 'metadata', f'{token_id}.dict.json')
+    if not os.path.exists(dict_path):
+        # Default structure
+        default_dict = {"comments": [], "likes": 0, "shares": 0, "add": []}
+        with open(dict_path, 'w', encoding='utf-8') as f:
+            json.dump(default_dict, f, indent=2)
+        return default_dict
+    else:
+        with open(dict_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+
+# Utility to get NFT metadata
+def get_nft_metadata(token_id):
+    meta_path = os.path.join(os.path.dirname(__file__), 'metadata', f'{token_id}.json')
+    if not os.path.exists(meta_path):
+        return None
+    with open(meta_path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+# Render nfts.html for a single NFT with its dict
+def render_nft_with_dict(token_id):
+    nft_meta = get_nft_metadata(token_id)
+    nft_dict = get_or_create_nft_dict(token_id)
+    if not nft_meta:
+        abort(404)
+    # nfts.html expects a list of entries, so wrap in a list
+    return render_template('nfts.html', entries=[nft_meta], nft_dict=nft_dict, token_id=token_id)
+
+# /add/<token_id>
+@app.route('/add/<token_id>', methods=['GET'])
+def add_nft(token_id):
+    return render_nft_with_dict(token_id)
+
+# /comment/<token_id>
+@app.route('/comment/<token_id>', methods=['GET'])
+def comment_nft(token_id):
+    return render_nft_with_dict(token_id)
+
+# /like/<token_id>
+@app.route('/like/<token_id>', methods=['GET'])
+def like_nft(token_id):
+    return render_nft_with_dict(token_id)
+
+# /share/<token_id>
+@app.route('/share/<token_id>', methods=['GET'])
+def share_nft(token_id):
+    return render_nft_with_dict(token_id)
 import uuid
 from flask import Flask, render_template, request, redirect, session, url_for, flash
 import os
@@ -104,6 +154,7 @@ def index():
 
 @app.route('/mint', methods=['GET', 'POST'])
 def mint():
+
     if request.method == 'POST':
         title = request.form.get('title', '')
         description = request.form.get('description', '')
@@ -113,14 +164,7 @@ def mint():
             flash("Invalid CPUB amount.")
             return redirect(url_for('mint'))
 
-        tx_hash, gas_fee_eth, receipt, token_id, cpub_tx_hash = mint_and_return_receipt(
-            title, description, wallet_address, cpub_amount
-        )
-        if not tx_hash:
-            flash("Minting failed.")
-            return redirect(url_for('mint'))
-
-        # --- Begin file operations and git workflow ---
+        # --- Begin file operations ---
         current_dir = os.getcwd()
         OUTPUT_DIR = os.path.join(current_dir, 'html')
         JSON_DIR = os.path.join(current_dir, 'metadata')
@@ -133,13 +177,17 @@ def mint():
         # Generate EVM address for metadata
         evm_address = generate_evm_address()
 
+
+        # Use evm_address as the id for HTML and template
+        temp_token_id = str(uuid.uuid4())
+
         # Write JSON metadata with description as the link to the token's HTML page
         json_content = {
-            "id": token_id,
+            "id": evm_address,
             "name": title,
-            "description": f"https://funhub.lol/app/html/{token_id}.html",
+            "description": f"https://funhub.lol/app/html/{evm_address}.html",
             "image": image_url,
-            "external_url": f"https://funhub.lol/app/html/{token_id}.html",
+            "external_url": f"https://funhub.lol/app/html/{evm_address}.html",
             "attributes": [
                 {"trait_type": "Creator", "value": username},
                 {"trait_type": "Wallet", "value": wallet_address},
@@ -148,17 +196,18 @@ def mint():
             ],
             "cpub_score": cpub_amount
         }
-        with open(os.path.join(JSON_DIR, f"{token_id}.json"), "w", encoding="utf-8") as f:
+        with open(os.path.join(JSON_DIR, f"{evm_address}.json"), "w", encoding="utf-8") as f:
             json.dump(json_content, f, indent=2)
 
-        # Write HTML page for the NFT
-        with open(os.path.join(OUTPUT_DIR, f"{token_id}.html"), "w", encoding="utf-8") as f:
+        # Write HTML page for the NFT, pass id=evm_address
+        with open(os.path.join(OUTPUT_DIR, f"{evm_address}.html"), "w", encoding="utf-8") as f:
             f.write(render_template('nft.html', image=image_url,
                                     title=title,
                                     body=image_url + "\n\n" + description,
                                     username=username,
                                     wallet_address=wallet_address,
-                                    token_id=token_id,
+                                    token_id=evm_address,
+                                    id=evm_address,
                                     cpub_score=cpub_amount))
 
         # Update NFT index page (nfts.html) with all NFTs
@@ -177,8 +226,16 @@ def mint():
         with open(os.path.join(current_dir, 'nfts.html'), "w", encoding="utf-8") as f:
             f.write(render_template('nfts.html', entries=nft_entries_sorted))
 
+        # --- Run github_workflow.sh before minting ---
         subprocess.run(["/bin/bash", "github_workflow.sh"], check=True)
-        # --- End file operations and git workflow ---
+
+        # --- Mint after workflow ---
+        tx_hash, gas_fee_eth, receipt, token_id, cpub_tx_hash = mint_and_return_receipt(
+            title, description, wallet_address, cpub_amount
+        )
+        if not tx_hash:
+            flash("Minting failed.")
+            return redirect(url_for('mint'))
 
         return render_template(
             'success.html',
